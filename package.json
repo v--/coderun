@@ -1,0 +1,23 @@
+{
+  "name": "Coderun",
+  "description": "A dynamic, action-packed runner",
+  "author": "Macrohard",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/v--/coderun"
+  },
+  "scripts": {
+    "start": "brunch watch --server",
+    "test": "brunch test"
+  },
+  "dependencies": {
+    "auto-reload-brunch": ">= 1.0 < 1.8",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "connect": "^3.3.2",
+    "css-brunch": ">= 1.0 < 1.8",
+    "javascript-brunch": ">= 1.0 < 1.8",
+    "serve-static": "^1.7.1",
+    "uglify-js-brunch": ">= 1.0 < 1.8"
+  }
+}
