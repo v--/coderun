@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "public/application.js",
   "dependencies": {
-    "phaser": "~2.1.3"
+    "phaser": "~2.1.3",
+    "ianis.js": "*"
   },
   "overrides": {}
 }
