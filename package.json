@@ -11,7 +11,7 @@
     "start": "brunch watch --server",
     "test": "brunch test"
   },
-  "dependencies": {
+  "devDependencies": {
     "auto-reload-brunch": ">= 1.0 < 1.8",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "connect": "^3.3.2",
