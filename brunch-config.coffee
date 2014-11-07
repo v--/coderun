@@ -1,8 +1,24 @@
 exports.config =
+	sourceMaps: false
+	optimize: true
+
+	paths:
+		watched: ['app', 'boot']
+
 	files:
 		javascripts:
-			joinTo: 'application.js'
+			joinTo:
+				'application.js': /^app/
+				'boot.js': /^(boot|bower_components)/
+
 		stylesheets:
 			joinTo: 'application.css'
-		templates:
-			joinTo: 'application.js'
+
+	plugins:
+		autoReload:
+			enabled: true
+			port: 9485
+			delay: 200
+
+	modules:
+		wrapper: false

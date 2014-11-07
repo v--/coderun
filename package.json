@@ -12,7 +12,7 @@
     "test": "brunch test"
   },
   "devDependencies": {
-    "auto-reload-brunch": ">= 1.0 < 1.8",
+    "auto-reload-brunch": "^1.7.5",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "connect": "^3.3.2",
     "css-brunch": ">= 1.0 < 1.8",
