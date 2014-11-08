@@ -1,10 +1,8 @@
 var Console = require('console');
 var Player = require('player');
 var Beer = require('beer');
-var ExceptionGun = require('exceptiongun');
+var Exception_pack = require('exception_pack');
 var Level = require('level');
-var Beer = require('beer');
-var ExceptionGun = require('exceptionGun');
 var Block = require('block');
 var Label = require ('label');
 
@@ -33,14 +31,13 @@ function preload() {
   player.preload();
   beer = new Beer(game);
   beer.preload();
-  exceptiongun = new ExceptionGun(game);
-  exceptiongun.preload();
+  exception_pack = new Exception_pack(game);
+  exception_pack.preload();
   label = new Label(game);
   label.preload();
   beer=new Beer(game);
   beer.preload();
-  exceptionGun = new ExceptionGun(game);
-  exceptionGun.preload();
+
 
   block1 = new Block(game);
   block1.preload();
@@ -55,34 +52,21 @@ function create() {
   level.create();
   player.create();
   beer.create(0,0);
-  exceptiongun.create(120,120);
+  exception_pack.create(120,120);
   label.create();
   block1.create(0,0);
   block2.create(100,100);
-  block2.update();
-
 
 }
 
 function update() {
 
-  block1.update();
-  block2.update();
-  player.update();
-
-  exceptionGun.create(120,120);
-  block1.create(0,0);
-  block2.create(100,100);
-  block2.update();
-}
-
-function update() {
   level.update();
-  block1.update();
   block2.update();
   player.update();
 
 }
+
 
 window.addEventListener('resize', function () {
   game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
