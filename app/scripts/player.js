@@ -1,4 +1,4 @@
- function Player(game, onTilde) {
+function Player(game, onTilde) {
 
   this.logger = Logger.get('player');
   this.game = game;
@@ -11,10 +11,44 @@
 }
 
 Player.prototype = {
+  move: {
+    up: function() {
+      if (this.game.time.now > this.jumpTimer) {
+        this.sprite.body.moveUp(300);
+        this.jumpTimer = this.game.time.now + 750;
+      }
+    },
+
+    left: function() {
+      this.sprite.body.velocity.x = -300;
+    },
+
+    right: function() {
+      this.sprite.body.velocity.x = 300;
+    }
+  },
+
+  focus: function() {
+    this.game.input.keyboard.disabled = false;
+  },
+
+  blur: function() {
+    this.logger.info('Blurring');
+    this.game.input.keyboard.disabled = true;
+
+    if (this.onTilde)
+      this.onTilde();
+
+    return;
+  },
 
   preload: function() {
     this.logger.info("Loading player sprite.");
     this.game.load.spritesheet('player', 'img/man.png', 260, 260);
+  },
+
+  shoot: function() {
+
   },
 
   create: function() {
@@ -43,40 +77,20 @@ Player.prototype = {
     this.arrows = this.game.input.keyboard.createCursorKeys();
 
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
+    this.tilde.onDown.add(this.blur.bind(this));
+
+    var keyGroups = ['wasd', 'arrows']
+
+    for (i in keyGroups) {
+      for (direction in this.move)
+        this[keyGroups[i]][direction].onHoldCallback = this.move[direction].bind(this);
+    }
   },
-
-  shoot: function() {
-
-  },
-
   update: function() {
-    //
-    //this.sprite.body.velocity.x = 0;
-
-    if (this.tilde.isDown) {
-      this.logger.info('Blurring');
-      this.game.input.keyboard.disabled = true;
-
-      if (this.onTilde)
-        this.onTilde();
-
-      return;
-    }
-
-    if (this.arrows.right.isDown || this.wasd.right.isDown) {
-      this.sprite.body.velocity.x = 200;
-    }
-
-    if (this.arrows.left.isDown || this.wasd.left.isDown) {
-      this.sprite.body.velocity.x = -200;
-    }
-
-    if (this.arrows.up.isDown && this.game.time.now > this.jumpTimer) {
-      this.sprite.body.moveUp(500);
-      this.jumpTimer = this.game.time.now + 850;
-    }
+    // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
+    this.sprite.body.velocity.y = 0;
+    this.sprite.body.velocity.x = 0;
   }
-
 }
 
 module.exports = Player;
