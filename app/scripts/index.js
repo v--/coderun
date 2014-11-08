@@ -20,7 +20,6 @@ catch (e) {
   mainLogger.error('The game could not be created: ' + e.message);
 }
 
-
 function preload() {
   game.level = new Level(game);
   game.level.preload();

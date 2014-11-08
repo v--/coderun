@@ -2,6 +2,8 @@ function Console(element, onEnter) {
 
   self = this;
 
+  this.messages = [],
+  this.interpreter = [],
   this.element = element;
   this.onEnter = onEnter;
   this.logger = Logger.get('console'),
@@ -28,7 +30,6 @@ function Console(element, onEnter) {
 
 Console.prototype = {
   value: '',
-  messages: [],
 
   blur: function() {
     this.reset();
