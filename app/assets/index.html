@@ -17,9 +17,9 @@
     </head>
 
     <body>
-        <section id="console">
-            <input id="input" type="text" name="console" data-input="scope.value" autofocus />
-            <span id="completion">{scope.value}</span>
+        <section id="console" data-rivets="app">
+            <input id="input" type="text" name="console" data-input="data.spell" autofocus />
+            <span id="completion" rv-value="data.spell"></span>
         </section>
 
         <main id="phaser">

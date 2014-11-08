@@ -1,19 +1,20 @@
 var logger = new Logger();
+var binding = {};
 logger.enabled = true;
 
 axios.get('/application.js').then(function (response) {
-    var scriptText = response.data;
-    eval(response.data);
+	var scriptText = response.data;
+	eval(response.data);
 }).catch(function (response) {
-    var title;
+	var title;
 
-    if (response instanceof Error) {
-        title = 'The game crashed :(';
-        logger.error(response.message);
-    }
+	if (response instanceof Error) {
+		title = 'The game crashed :(';
+		logger.error(response.message);
+	}
 
-    else
-        title = 'Could not load the game :(';
+	else
+		title = 'Could not load the game :(';
 
-    toastr.error(null, title);
+	toastr.error(null, title);
 });
