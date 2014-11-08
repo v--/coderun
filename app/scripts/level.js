@@ -1,8 +1,9 @@
 function Level(game) {
   Phaser.Stage.apply(this, [game]);
-  this.logger    = Logger.get('level');
-  this.game      = game;
+  this.logger           = Logger.get('level');
+  this.game             = game;
   this.backgroundSprite = null;
+  this.map              = null;
 }
 
 Level.prototype = Object.create(Phaser.Stage.prototype);
@@ -15,9 +16,15 @@ Level.prototype.preload = function() {
 
 Level.prototype.create = function() {
   this.game.physics.startSystem(Phaser.Physics.P2JS);
-  this.game.add.tilemap('map');
+  // this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
 
-  this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
+  // this.map = this.game.add.tilemap('map');
+  // this.map.addTilesetImage('level');
+
+
+  // var layer = this.map.createLayer('Tile Layer 1');
+  // this.map.setCollisionBetween(1, 5);
+  // layer.resizeWorld();
 };
 
 Level.prototype.update = function() {
