@@ -4,7 +4,6 @@ var Beer = require('beer');
 var ExceptionGun = require('exceptiongun');
 var Level = require('level');
 var Beer = require('beer');
-var ExceptionGun = require('exceptionGun');
 var Block = require('block');
 var Label = require ('label');
 
@@ -18,6 +17,7 @@ try {
   var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { preload: preload, create: create, update: update }, true);
   mainLogger.info('Game initialized');
 }
+
 catch (e) {
   mainLogger.error('The game could not be created: ' + e.message);
 }
@@ -25,7 +25,6 @@ catch (e) {
 var console =  new Console(document.getElementById('console'));
 
 function preload() {
-
   level = new Level(game);
   level.preload();
 
@@ -60,8 +59,6 @@ function create() {
   block1.create(0,0);
   block2.create(100,100);
   block2.update();
-
-
 }
 
 function update() {

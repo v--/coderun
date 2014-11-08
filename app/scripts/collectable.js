@@ -1,22 +1,22 @@
 function Collectable(game){
-	this.game = game;
-	this.name = null
-	this.image = null;
+  this.game = game;
+  this.name = null
+  this.image = null;
 }
 
 Collectable.prototype = {
 
-	preload: function() {
+  preload: function() {
     this.game.load.image(this.name, this.image);
-	},
+  },
 
-	create: function(x,y) {
-		 this.game.add.sprite(x,y,this.name);
-	},
+  create: function(x,y) {
+     this.game.add.sprite(x,y,this.name);
+  },
 
-	update: function() {
+  update: function() {
 
-	}
+  }
 
 }
 

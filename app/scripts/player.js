@@ -32,11 +32,16 @@ Player.prototype = {
     this.sprite.allowRotation = false;
     this.sprite.body.fixedRotation = true;
     this.arrows = this.game.input.keyboard.createCursorKeys();
+    this.tick = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
   },
 
   update: function() {
     this.sprite.body.setZeroVelocity();
-    if(this.arrows.right.isDown || this.wasd.right.isDown) {
+
+    if (this.tick.isDown)
+      this.game.input.keyboard.disabled = true;
+
+    if (this.arrows.right.isDown || this.wasd.right.isDown) {
       this.sprite.body.moveRight(300);
     } else if(this.arrows.left.isDown || this.wasd.left.isDown) {
       this.sprite.body.moveLeft(300);

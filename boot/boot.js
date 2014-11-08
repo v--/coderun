@@ -11,6 +11,7 @@ axios.get('/application.js').then(function (response) {
   require('index');
 }).catch(function (response) {
   var title;
+  toastr.error(response);
 
   if (response instanceof Error) {
     title = 'The game crashed :(';
@@ -20,5 +21,5 @@ axios.get('/application.js').then(function (response) {
   else
     title = 'Could not load the game :(';
 
-  toastr.error(null, title);
+  toastr.error(title);
 });

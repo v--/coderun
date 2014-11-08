@@ -1,9 +1,9 @@
 var Collectable = require('collectable');
 
 function Beer() {
-	Collectable.apply(this, arguments);
-	this.image = 'img/beer.png';
-	this.name = 'beer';
+  Collectable.apply(this, arguments);
+  this.image = 'img/beer.png';
+  this.name = 'beer';
 }
 
 Beer.prototype = Object.create(Collectable.prototype);

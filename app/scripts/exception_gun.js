@@ -3,7 +3,7 @@ var Collectable = require('collectable');
 function ExceptionGun() {
   Collectable.apply(this, arguments);
   this.image = 'img/exceptionGun.png';
-  this.name = 'exceptiongun';
+  this.name = 'exceptionGun';
 }
 
 ExceptionGun.prototype = Object.create(Collectable.prototype);
