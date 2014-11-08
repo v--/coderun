@@ -65,8 +65,8 @@ Level.prototype.create = function() {
   //block3.setCollisionGroup(this.collisionGroup);
 
   this.layer = this.map.createLayer('solid');
-  //this.layer.debug = true;
-  this.layer.fixedToCamera = false;
+  this.layer.debug = true;
+  //this.layer.fixedToCamera = false;
 
   this.layer.resizeWorld();
 
