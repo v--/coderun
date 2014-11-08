@@ -1,3 +1,6 @@
+var Console = require('console');
+var Player = require('player');
+
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -22,7 +25,7 @@ function create() {
 }
 
 function update() {
-
+  player.update();
 }
 
 window.addEventListener('resize', function () {
