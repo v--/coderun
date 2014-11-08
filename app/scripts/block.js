@@ -19,10 +19,9 @@ Block.prototype = {
     this.sprite =  this.game.add.sprite(x, y, 'block');
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
-    //this.game.physics.p2.enableBody(this.sprite, true);
-    if (this.isMovable) {
-      this.game.physics.arcade.enable(this.sprite);
-    }
+    this.game.physics.arcade.enable(this.sprite);
+    this.sprite.body.static = true;
+    this.sprite.body.gravity = 0;
   },
 
   update: function() {
@@ -63,6 +62,10 @@ Block.prototype = {
           break;
       }
     }
+  },
+
+  setCollisionGroup: function(group) {
+    this.sprite.body.setCollisionGroup(group);
   }
 }
 

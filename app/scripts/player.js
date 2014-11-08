@@ -1,10 +1,13 @@
-function Player(game) {
+ function Player(game, onTilde) {
 
   this.logger = Logger.get('player');
   this.game = game;
+  this.onTilde = onTilde;
   this.sprite = null;
   this.arrows = null;
   this.wasd = null;
+  this.jumpTimer = 0;
+  this.collisionGroup = null;
 }
 
 Player.prototype = {
@@ -15,33 +18,57 @@ Player.prototype = {
   },
 
   create: function() {
-    this.game.physics.startSystem(Phaser.Physics.P2JS);
+    this.collisionGroup = this.game.physics.p2.createCollisionGroup();
     this.logger.info("Creating player.");
     this.sprite = this.game.add.sprite(32, 100, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
+    this.sprite.allowRotation = false;
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
+    this.game.physics.p2.enable(this.sprite);
+
+    this.sprite.body.fixedRotation = true;
+    this.sprite.body.collideWorldBounds = true;
+    //this.sprite.body.setCollisionGroup(this.collisionGroup);
+    //this.sprite.body.collides(this.game.level.collisionGroup);
+
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
       left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
       right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
     };
-    this.game.physics.p2.enable(this.sprite);
-    this.game.physics.p2.gravity.y = 10800;
-    this.sprite.allowRotation = false;
-    this.sprite.body.fixedRotation = true;
+
     this.arrows = this.game.input.keyboard.createCursorKeys();
+
+    this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
   },
 
   update: function() {
-    this.sprite.body.setZeroVelocity();
-    if(this.arrows.right.isDown || this.wasd.right.isDown) {
-      this.sprite.body.moveRight(300);
-    } else if(this.arrows.left.isDown || this.wasd.left.isDown) {
-      this.sprite.body.moveLeft(300);
-    } else if(this.arrows.up.isPressed) {
-      this.sprite.body.velocity.y = -400;
+    //
+    this.sprite.body.velocity.x = 0;
+
+    if (this.tilde.isDown) {
+      this.logger.info('Blurring');
+      this.game.input.keyboard.disabled = true;
+
+      if (this.onTilde)
+        this.onTilde();
+
+      return;
+    }
+
+    if (this.arrows.right.isDown || this.wasd.right.isDown) {
+      this.sprite.body.velocity.x = 300;
+    }
+
+    if (this.arrows.left.isDown || this.wasd.left.isDown) {
+      this.sprite.body.velocity.x = -300;
+    }
+
+    if (this.arrows.up.isDown && this.game.time.now > this.jumpTimer) {
+      this.sprite.body.moveUp(300);
+      this.jumpTimer = this.game.time.now + 750;
     }
   }
 
