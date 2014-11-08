@@ -14,9 +14,12 @@ function Console(element, onEnter) {
   this.logger.info('Created sub elements');
 
   this.input.addEventListener('change', this.onSubmit);
-  this.input.addEventListener('keydown', this.onValueChange);
-  this.input.addEventListener('cut', this.onValueChange);
-  this.input.addEventListener('paste', this.onValueChange);
+  // this.input.addEventListener('keydown', this.tildeCheck);
+
+  changeEvents = ['keydown', 'cut', 'paste'];
+
+  for (i in changeEvents)
+    this.input.addEventListener(changeEvents[i], this.onValueChange);
 
   this.logger.info('Added watchers');
 }
@@ -25,6 +28,11 @@ Console.prototype = {
   value: '',
 
   blur: function() {
+    this.reset();
+
+    if (self.onEnter)
+      self.onEnter();
+
     this.input.blur();
   },
 
@@ -38,11 +46,12 @@ Console.prototype = {
 
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
-    self.reset();
     self.blur();
+  },
 
-    if (self.onEnter)
-      self.onEnter();
+  tildeCheck: function(e) {
+    if (e.key === '`');
+      this.blur();
   },
 
   onValueChange: function(e) {
