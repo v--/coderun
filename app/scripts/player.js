@@ -14,7 +14,7 @@ Player.prototype = {
   move: {
     up: function() {
       if (this.game.time.now > this.jumpTimer) {
-        this.sprite.body.moveUp(300);
+        this.sprite.body.moveUp(500);
         this.jumpTimer = this.game.time.now + 950;
       }
     },
@@ -48,8 +48,15 @@ Player.prototype = {
   },
 
   shoot: function() {
-      var shootTimer = this.game.time.now + 300;
-      var bullet = this.game.add.sprite(32, 32, 'bullet');
+    toastr.info("Exception");
+    var shootTimer = this.game.time.now + 300;
+    var bullet = this.game.add.sprite(this.game.player.sprite.x + 32, this.game.player.sprite.y, 'bullet');
+    this.game.physics.p2.enable(bullet);
+    //bullet.body.moveRight(300);
+    bullet.lifespan = 3000;
+    bullet.body.restitution = 3000;
+    bullet.body.velocity.x = 900;
+    bullet.body.velocity.y = 0;
   },
 
   create: function() {
@@ -80,7 +87,9 @@ Player.prototype = {
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
     this.tilde.onDown.add(this.blur.bind(this));
 
-    this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
+    this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.space.onDown.add(this.shoot.bind(this));
+
 
     var keyGroups = ['wasd', 'arrows']
 
