@@ -1,5 +1,3 @@
-var app = {
-	data: {
-		spell: 'Hello World!'
-	}
-};
+function Console(element) {
+	this.element = element;
+}

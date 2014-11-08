@@ -11,6 +11,11 @@ exports.config =
 				'application.js': /^app/
 				'boot.js': /^(boot|bower_components)/
 
+			order:
+				after: [
+					'app/scripts/index.js'
+				]
+
 		stylesheets:
 			joinTo: 'application.css'
 
