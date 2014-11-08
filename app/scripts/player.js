@@ -11,6 +11,7 @@ function Player(game, onTilde) {
 }
 
 Player.prototype = {
+
   move: {
     up: function() {
       if (this.game.time.now > this.jumpTimer) {
@@ -39,12 +40,7 @@ Player.prototype = {
     if (this.onTilde)
       this.onTilde();
 
-    return;
-  },
-
-  preload: function() {
-    this.logger.info("Loading player sprite.");
-    this.game.load.spritesheet('player', 'img/man.png', 260, 260);
+    return false;
   },
 
   shoot: function() {
@@ -66,6 +62,11 @@ Player.prototype = {
     }
   },
 
+  preload: function() {
+    this.logger.info("Loading player sprite.");
+    this.game.load.spritesheet('player', 'img/man.png', 260, 260);
+  },
+
   create: function() {
     this.collisionGroup = this.game.physics.p2.createCollisionGroup();
     this.logger.info("Creating player.");
@@ -82,6 +83,7 @@ Player.prototype = {
     //this.sprite.body.collides(this.game.level.collisionGroup);
     this.sprite.body.velocity.x = 0;
     this.sprite.body.damping = 0.9;
+
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
@@ -105,6 +107,7 @@ Player.prototype = {
         this[keyGroups[i]][direction].onHoldCallback = this.move[direction].bind(this);
     }
   },
+
   update: function() {
     // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
     // this.sprite.body.velocity.y = 0;

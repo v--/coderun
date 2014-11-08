@@ -29,10 +29,11 @@ Console.prototype = {
 
   blur: function() {
     this.reset();
-    this.input.blur();
 
     if (self.onEnter)
       self.onEnter();
+
+    this.input.blur();
   },
 
   focus: function() {

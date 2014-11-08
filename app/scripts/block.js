@@ -32,8 +32,6 @@ Block.prototype = {
     if(this.isMovable) {
       var currentX = this.sprite.x;
       var currentY = this.sprite.y;
-      console.log(currentX);
-      console.log(currentY);
       // switch(direction) {
       //   case 'left':
       //     this.game.physics.arcade.moveToXY(this.sprite, currentX + number, currentY, 100); break;
