@@ -1,4 +1,4 @@
-function Player(game) {
+ function Player(game) {
 
   this.logger = Logger.get('player');
   this.game = game;
@@ -38,15 +38,20 @@ Player.prototype = {
   update: function() {
     this.sprite.body.setZeroVelocity();
 
-    if (this.tick.isDown)
+    if (this.tick.isDown) {
       this.game.input.keyboard.disabled = true;
+    }
 
     if (this.arrows.right.isDown || this.wasd.right.isDown) {
       this.sprite.body.moveRight(300);
-    } else if(this.arrows.left.isDown || this.wasd.left.isDown) {
+    }
+
+    if (this.arrows.left.isDown || this.wasd.left.isDown) {
       this.sprite.body.moveLeft(300);
-    } else if(this.arrows.up.isPressed) {
-      this.sprite.body.velocity.y = -400;
+    }
+
+    if (this.arrows.up.isDown) {
+      this.sprite.body.velocity.y = -800;
     }
   }
 
