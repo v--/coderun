@@ -21,4 +21,5 @@ exports.config =
 			delay: 200
 
 	modules:
+		definition: false
 		wrapper: false

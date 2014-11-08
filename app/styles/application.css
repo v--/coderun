@@ -1,6 +1,40 @@
 html, body {
-    background-color: #000;
     margin: 0;
     height: 100%;
     width: 100%;
+    background-color: #506;
+}
+
+#console {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+}
+
+#input {
+    font-size: 20px;
+    color: #fff;
+    background-color: #304;
+    border: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#completion {
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    color: rgba(1, 1, 1, 0.5);
+}
+
+#history {
+    color: #fff;
+}
+
+#phaser {
+    position: absolute;
+    width: 60%;
+    left: 40%;
+    height: 100%;
 }

@@ -8,7 +8,7 @@
         <![endif]-->
 
         <meta charset="UTF-8" />
-        <meta name="description" content="Very cool game" />
+        <meta name="description" content="A very cool game" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/application.css" />
         <base href="/" />
@@ -17,6 +17,13 @@
     </head>
 
     <body>
+        <section id="console">
+            <input id="input" type="text" name="console" data-input="scope.value" autofocus />
+            <span id="completion">{scope.value}</span>
+        </section>
+
+        <main id="phaser">
+        </main>
     </body>
 </html>
 

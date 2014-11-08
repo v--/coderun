@@ -10,7 +10,8 @@
 			[
 				".git",
 				"bower_components",
-				"node_modules"
+				"node_modules",
+				"public"
 			],
 			"follow_symlinks": true,
 			"path": "."
