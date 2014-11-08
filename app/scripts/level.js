@@ -23,8 +23,8 @@ function Level(game) {
 
   this.layer            = null;
   this.player           = null;
-  this.tileset           = null;
-
+  this.tileset          = null;
+  this.blocks           = [];
 
   this.tilesetRef = null;
   this.tilemapRef = null;
@@ -79,6 +79,8 @@ Level.prototype.create = function() {
   block1.create(0,0);
   block2.create(100,100);
   block3.create(0, 300);
+
+  this.blocks = [block1, block2, block3];
 
   block2.translate('left', 300);
   //block3.setCollisionGroup(this.collisionGroup);
