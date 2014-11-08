@@ -23,11 +23,10 @@ function preload() {
   game.level = new Level(game);
   game.level.preload();
 
-  player = new Player(game, console.focus.bind(console));
-  console.onEnter = player.focus.bind(player);
+  game.player = new Player(game, console.focus.bind(console));
+  console.onEnter = game.player.focus.bind(game.player);
   game.player.preload();
 
-  player.preload();
   beer = new Beer(game);
   beer.preload();
   exception_pack = new ExceptionPack(game);
