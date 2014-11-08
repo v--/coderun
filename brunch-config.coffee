@@ -1,3 +1,5 @@
+require 'ianis.js'
+
 exports.config =
   sourceMaps: false
   optimize: true
@@ -27,4 +29,4 @@ exports.config =
 
   modules:
     nameCleaner: (path) ->
-      path.match(/([^\/]*)(?:\/+)?$/)[1]
+      path.basename()

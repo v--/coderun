@@ -16,6 +16,7 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "connect": "^3.3.2",
     "css-brunch": ">= 1.0 < 1.8",
+    "ianis.js": "^1.0.4",
     "javascript-brunch": ">= 1.0 < 1.8",
     "serve-static": "^1.7.1",
     "uglify-js-brunch": ">= 1.0 < 1.8"

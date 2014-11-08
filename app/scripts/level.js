@@ -4,6 +4,7 @@ function Level(game) {
   this.game             = game;
   this.backgroundSprite = null;
   this.map              = null;
+
   this.layer            = null;
   this.player           = null;
   this.tileset           = null;
@@ -11,6 +12,7 @@ function Level(game) {
 
   this.tilesetRef = null;
   this.tilemapRef = null;
+  this.collisionGroup   = null;
 }
 
 // Level.prototype = Object.create(Phaser.Stage.prototype);
@@ -27,6 +29,9 @@ Level.prototype.create = function() {
 
   this.map = this.game.add.tilemap('map');
   this.map.addTilesetImage('tileset_13');
+  this.collisionGroup = this.game.physics.p2.createCollisionGroup();
+
+  // this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
 
   this.layer = this.map.createLayer('solid');
   this.layer.debug = true;
@@ -34,8 +39,6 @@ Level.prototype.create = function() {
 
   this.layer.resizeWorld();
 
-
-// Kude da go sloja d
   this.map.setCollisionBetween(0, 100, true, this.layer, true);
   this.game.physics.p2.convertTilemap(this.map, this.layer);
   this.game.physics.p2.setBoundsToWorld(true, true, true, true, false);
