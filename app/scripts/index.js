@@ -1,6 +1,10 @@
 var Console = require('console');
 var Player = require('player');
 var Level = require('level');
+var Beer = require('beer');
+var ExceptionPack = require('exception_pack');
+var Label = require('label');
+var Block = require('block');
 
 var console =  new Console(document.getElementById('console'));
 var phaserContainer = document.getElementById('phaser');
@@ -29,7 +33,7 @@ function preload() {
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  game.physics.p2.gravity.y = 300;
+  game.physics.p2.gravity.y = 1000;
 
   game.level.create();
   game.player.create();

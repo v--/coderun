@@ -47,6 +47,10 @@ Player.prototype = {
     this.game.load.spritesheet('player', 'img/man.png', 260, 260);
   },
 
+  shoot: function() {
+
+  },
+
   create: function() {
     this.collisionGroup = this.game.physics.p2.createCollisionGroup();
     this.logger.info("Creating player.");
@@ -61,7 +65,8 @@ Player.prototype = {
     this.sprite.body.collideWorldBounds = true;
     //this.sprite.body.setCollisionGroup(this.collisionGroup);
     //this.sprite.body.collides(this.game.level.collisionGroup);
-
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.damping = 0.9;
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
@@ -81,9 +86,8 @@ Player.prototype = {
         this[keyGroups[i]][direction].onHoldCallback = this.move[direction].bind(this);
     }
   },
-
   update: function() {
-    this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
+    // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
     this.sprite.body.velocity.y = 0;
     this.sprite.body.velocity.x = 0;
   }
