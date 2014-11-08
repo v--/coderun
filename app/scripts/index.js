@@ -1,3 +1,7 @@
+var Console = require('console');
+var Player = require('player');
+var Level = require('level');
+
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -13,16 +17,22 @@ catch (e) {
 var console =  new Console(document.getElementById('console'));
 
 function preload() {
+
+  level = new Level(game);
+  level.preload();
+
   player = new Player(game);
   player.preload();
 }
 
 function create() {
+
+  level.create();
   player.create();
 }
 
 function update() {
-
+  level.update();
 }
 
 window.addEventListener('resize', function () {
