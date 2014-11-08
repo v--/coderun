@@ -20,5 +20,5 @@ function update() {
 }
 
 window.addEventListener('resize', function () {
-    game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
+	game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
 });
