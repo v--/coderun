@@ -32,7 +32,9 @@ function create() {
 }
 
 function update() {
+
   level.update();
+  player.update();
 }
 
 window.addEventListener('resize', function () {

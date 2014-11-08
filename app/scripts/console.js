@@ -27,3 +27,5 @@ Console.prototype = {
     self.logger.info('New command: ' + this.value);
   }
 }
+
+module.exports = Console
