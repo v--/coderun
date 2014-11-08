@@ -28,4 +28,4 @@ Console.prototype = {
   }
 }
 
-module.exports = Console
+module.exports = Console;

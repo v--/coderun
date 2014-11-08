@@ -50,4 +50,4 @@ Player.prototype = {
 
 }
 
-module.exports = Player
+module.exports = Player;
