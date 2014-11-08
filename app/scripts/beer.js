@@ -12,4 +12,6 @@ Beer.prototype.preload = Collectable.prototype.preload;
 
 Beer.prototype.create=Collectable.prototype.create;
 
+
+
 module.exports = Beer;
