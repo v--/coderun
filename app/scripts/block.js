@@ -41,8 +41,6 @@ Block.prototype = {
     if(this.isMovable) {
       var currentX = this.sprite.x;
       var currentY = this.sprite.y;
-<<<<<<< HEAD
-=======
       // switch(direction) {
       //   case 'left':
       //     this.game.physics.arcade.moveToXY(this.sprite, currentX + number, currentY, 100); break;
@@ -55,7 +53,6 @@ Block.prototype = {
       //   default:
       //     break;
       // }
->>>>>>> 92bb59ed36c87fea804535a54639714181f9ab5a
       var duration = number * 5;
       var ease = Phaser.Easing.Linear.NONE;
 

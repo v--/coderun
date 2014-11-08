@@ -44,7 +44,7 @@ Player.prototype = {
   },
 
   shoot: function() {
-    toastr.info("Exception");
+    //toastr.info("Exception");
     var shootTimer = this.game.time.now + 300;
     var bullet = this.game.add.sprite(this.game.player.sprite.x + 32, this.game.player.sprite.y, 'bullet');
     this.game.physics.p2.enable(bullet);
@@ -58,8 +58,14 @@ Player.prototype = {
 
   bulletHit: function(body, shapeA, shapeB, equation) {
     if(body.sprite != null) {
-      toastr.error(body.sprite.key);
+      if(body.sprite.key == 'bug') {
+        toastr.info('Bug fixed!');
+        body.sprite.destroy();
+        console.log(equation);
+
+      }
     }
+
   },
 
   preload: function() {
@@ -99,6 +105,7 @@ Player.prototype = {
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.space.onDown.add(this.shoot.bind(this));
 
+    //this.sprite.body.onBeginContact(); 
 
     var keyGroups = ['wasd', 'arrows']
 
