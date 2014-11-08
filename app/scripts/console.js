@@ -14,7 +14,7 @@ function Console(element, onTilde) {
   this.logger.info('Created sub elements');
 
   this.input.addEventListener('change', this.onSubmit);
-  this.input.addEventListener('keyup', this.onValueChange);
+  this.input.addEventListener('keydown', this.onValueChange);
   this.input.addEventListener('cut', this.onValueChange);
   this.input.addEventListener('paste', this.onValueChange);
 
@@ -25,32 +25,42 @@ Console.prototype = {
   value: '',
 
   blur: function() {
-    this.element.blur();
+    this.input.blur();
   },
 
   focus: function() {
-    this.element.focus();
+    this.input.focus();
   },
 
-  onSubmit: function() {
+  reset: function() {
+    this.input.value = '';
+  },
+
+  onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
+    self.reset();
+
+    if (self.onTilde)
+      self.onTilde();
+
+    self.blur();
   },
 
-  onValueChange: function() {
-    var isTilde = this.value.lastIndexOf('`') === this.value.length - 1;
-
-    if (isTilde) {
+  onValueChange: function(e) {
+    if (e.key === '`') {
+      this.value = this.value.substr(0, this.value - 1);
       self.logger.info('Blurring');
-      self.blur();
 
       if (self.onTilde)
         self.onTilde();
+
+      self.blur();
     }
 
     else
       self.logger.info('New value: ' + this.value);
 
-    return !isTilde;
+    return true;
   }
 }
 

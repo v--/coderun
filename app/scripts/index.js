@@ -1,7 +1,7 @@
 var Console = require('console');
 var Player = require('player');
 var Beer = require('beer');
-var Exception_pack = require('exception_pack');
+var ExceptionPack = require('exception_pack');
 var Level = require('level');
 var Beer = require('beer');
 var Block = require('block');
@@ -37,7 +37,7 @@ function preload() {
   player.preload();
   beer = new Beer(game);
   beer.preload();
-  exception_pack = new Exception_pack(game);
+  exception_pack = new ExceptionPack(game);
   exception_pack.preload();
   label = new Label(game);
   label.preload();
