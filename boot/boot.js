@@ -1,8 +1,9 @@
-var logger = new Logger();
-var binding = {};
-logger.enabled = true;
+Logger.useDefaults();
+// Logger.setLevel(Logger.OFF);
+var mainLogger = Logger.get('main');
 
 axios.get('/application.js').then(function (response) {
+	mainLogger.info('Loaded application.js');
 	var scriptText = response.data;
 	eval(response.data);
 }).catch(function (response) {
@@ -10,7 +11,7 @@ axios.get('/application.js').then(function (response) {
 
 	if (response instanceof Error) {
 		title = 'The game crashed :(';
-		logger.error(response.message);
+		mainLogger.error(response.message);
 	}
 
 	else

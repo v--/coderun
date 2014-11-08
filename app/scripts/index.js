@@ -1,14 +1,20 @@
 var phaserContainer = document.getElementById('phaser');
-var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { preload: preload, create: create, update: update }, true);
-
 var player = null;
 var level = null;
 
-function preload() {
+try {
+  var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { preload: preload, create: create, update: update }, true);
+  mainLogger.info('Game initialized');
+}
+catch (e) {
+  mainLogger.error('The game could not be created: ' + e.message);
+}
 
+var console =  new Console(document.getElementById('console'));
+
+function preload() {
   player = new Player(game);
   player.preload();
-
 }
 
 function create() {
