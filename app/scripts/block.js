@@ -17,16 +17,19 @@ Block.prototype = {
     this.sprite =  this.game.add.sprite(x, y, 'block');
     this.sprite.scale.x = 0.5;
     this.sprite.scale.y = 0.5;
-    if (this.isMovable) {
-      this.game.physics.arcade.enable(this.sprite);
-      this.sprite.body.gravity = 0;
-    }
+    this.game.physics.p2.enable(this.sprite);
+    this.sprite.body.static = true;
+    this.sprite.body.gravity = 0;
   },
 
   update: function() {
 
     if(this.isMovable) {
     }
+  },
+
+  setCollisionGroup: function(group) {
+    this.sprite.body.setCollisionGroup(group);
   }
 
 }

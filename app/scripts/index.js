@@ -1,11 +1,6 @@
 var Console = require('console');
 var Player = require('player');
-var Beer = require('beer');
-var ExceptionPack = require('exception_pack');
 var Level = require('level');
-var Beer = require('beer');
-var Block = require('block');
-var Label = require ('label');
 
 var phaserContainer = document.getElementById('phaser');
 var player = null;
@@ -27,56 +22,32 @@ var console =  new Console(document.getElementById('console'), function() {
 });
 
 function preload() {
-  level = new Level(game);
-  level.preload();
+  game.level = new Level(game);
+  game.level.preload();
 
-  player = new Player(game, function() {
+  game.player = new Player(game, function() {
     console.focus();
   });
 
-  player.preload();
-  beer = new Beer(game);
-  beer.preload();
-  exception_pack = new ExceptionPack(game);
-  exception_pack.preload();
-  label = new Label(game);
-  label.preload();
-  beer=new Beer(game);
-  beer.preload();
-
-  block1 = new Block(game);
-  block1.preload();
-  block2 = new Block(game);
-  block2.isMovable = true;
-  block2.preload();
-
-  block3 = new Block(game);
-  block3.isMovable = true;
-  block3.preload();
+  game.player.preload();
+  
 
 }
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  level.create();
-  player.create();
-  beer.create(0,0);
-  exception_pack.create(120,120);
-  label.create();
-  block1.create(0,0);
-  block2.create(100,100);
-  block3.create(0, 300);
+  game.physics.p2.gravity.y = 300;
+
+  game.level.create();
+  game.player.create();
 
 }
 
 function update() {
 
-  level.update();
-  block1.update();
-  block2.update();
-  block3.update();
-  player.update();
+  game.level.update();
+  game.player.update();
 
 }
 
