@@ -57,6 +57,13 @@ Player.prototype = {
     bullet.body.restitution = 3000;
     bullet.body.velocity.x = 900;
     bullet.body.velocity.y = 0;
+    bullet.body.onBeginContact.add(this.bulletHit, this);
+  },
+
+  bulletHit: function(body, shapeA, shapeB, equation) {
+    if(body.sprite != null) {
+      toastr.error(body.sprite.key);
+    }
   },
 
   create: function() {
