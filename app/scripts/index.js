@@ -2,6 +2,9 @@ var Console = require('console');
 var Player = require('player');
 var Beer = require('beer');
 var ExceptionGun = require('exceptiongun');
+var Level = require('level');
+var Beer = require('beer');
+var ExceptionGun = require('exceptionGun');
 var Block = require('block');
 
 var phaserContainer = document.getElementById('phaser');
@@ -21,6 +24,10 @@ catch (e) {
 var console =  new Console(document.getElementById('console'));
 
 function preload() {
+
+  level = new Level(game);
+  level.preload();
+
   player = new Player(game);
   player.preload();
   beer = new Beer(game);
@@ -29,6 +36,11 @@ function preload() {
   exceptiongun.preload();
   label = new Label(game);
   label.preload();
+  beer=new Beer(game);
+  beer.preload();
+  exceptionGun = new ExceptionGun(game);
+  exceptionGun.preload();
+
   block1 = new Block(game);
   block1.preload();
   block2 = new Block(game);
@@ -38,6 +50,8 @@ function preload() {
 }
 
 function create() {
+
+  level.create();
   player.create();
   beer.create(0,0);
   exceptiongun.create(120,120);
@@ -51,6 +65,18 @@ function create() {
 
 function update() {
 
+  block1.update();
+  block2.update();
+  player.update();
+
+  exceptionGun.create(120,120);
+  block1.create(0,0);
+  block2.create(100,100);
+  block2.update();
+}
+
+function update() {
+  level.update();
   block1.update();
   block2.update();
   player.update();
