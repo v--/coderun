@@ -12,4 +12,4 @@ ExceptionPack.prototype.preload = Collectable.prototype.preload;
 
 ExceptionPack.prototype.create = Collectable.prototype.create;
 
-module.exports = ExceptionPpack;
+module.exports = ExceptionPack;
