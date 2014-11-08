@@ -39,17 +39,21 @@ function preload() {
   beer=new Beer(game);
   beer.preload();
 
-
   block1 = new Block(game);
   block1.preload();
   block2 = new Block(game);
   block2.isMovable = true;
   block2.preload();
 
+  block3 = new Block(game);
+  block3.isMovable = true;
+  block3.preload();
+
 }
 
 function create() {
-
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  game.physics.startSystem(Phaser.Physics.P2JS);
   level.create();
   player.create();
   beer.create(0,0);
@@ -57,13 +61,16 @@ function create() {
   label.create();
   block1.create(0,0);
   block2.create(100,100);
-  block2.update();
+  block3.create(0, 300);
+
 }
 
 function update() {
 
   level.update();
+  block1.update();
   block2.update();
+  block3.update();
   player.update();
 
 }

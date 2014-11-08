@@ -15,43 +15,48 @@ Player.prototype = {
   },
 
   create: function() {
-    this.game.physics.startSystem(Phaser.Physics.P2JS);
     this.logger.info("Creating player.");
     this.sprite = this.game.add.sprite(32, 100, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
+
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
       left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
       right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
     };
-    this.game.physics.p2.enable(this.sprite);
-    this.game.physics.p2.gravity.y = 10800;
+
+    this.game.physics.arcade.enable(this.sprite);
+    this.game.physics.arcade.gravity.y = 8000;
     this.sprite.allowRotation = false;
     this.sprite.body.fixedRotation = true;
     this.arrows = this.game.input.keyboard.createCursorKeys();
     this.tick = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
+
+    this.sprite.body.collideWorldBounds = true;
   },
 
   update: function() {
-    this.sprite.body.setZeroVelocity();
+    this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
+    this.sprite.body.velocity.y = 0;
+    this.sprite.body.velocity.x = 0;
 
     if (this.tick.isDown) {
       this.game.input.keyboard.disabled = true;
     }
 
     if (this.arrows.right.isDown || this.wasd.right.isDown) {
-      this.sprite.body.moveRight(300);
+      this.sprite.body.velocity.x = 300;
     }
 
     if (this.arrows.left.isDown || this.wasd.left.isDown) {
-      this.sprite.body.moveLeft(300);
+      this.sprite.body.velocity.x = -300;
     }
 
-    if (this.arrows.up.isDown) {
-      this.sprite.body.velocity.y = -800;
+    if (this.arrows.up.isDown && this.sprite.body.onFloor()) {
+      this.sprite.body.velocity.y = -8000;
     }
   }
 
