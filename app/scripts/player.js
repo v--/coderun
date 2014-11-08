@@ -31,7 +31,8 @@ Player.prototype = {
     this.sprite.body.collideWorldBounds = true;
     //this.sprite.body.setCollisionGroup(this.collisionGroup);
     //this.sprite.body.collides(this.game.level.collisionGroup);
-
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.damping = 0.9;
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
@@ -44,9 +45,13 @@ Player.prototype = {
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
   },
 
+  shoot: function() {
+
+  },
+
   update: function() {
     //
-    this.sprite.body.velocity.x = 0;
+    //this.sprite.body.velocity.x = 0;
 
     if (this.tilde.isDown) {
       this.logger.info('Blurring');
@@ -59,16 +64,16 @@ Player.prototype = {
     }
 
     if (this.arrows.right.isDown || this.wasd.right.isDown) {
-      this.sprite.body.velocity.x = 300;
+      this.sprite.body.velocity.x = 200;
     }
 
     if (this.arrows.left.isDown || this.wasd.left.isDown) {
-      this.sprite.body.velocity.x = -300;
+      this.sprite.body.velocity.x = -200;
     }
 
     if (this.arrows.up.isDown && this.game.time.now > this.jumpTimer) {
-      this.sprite.body.moveUp(300);
-      this.jumpTimer = this.game.time.now + 750;
+      this.sprite.body.moveUp(500);
+      this.jumpTimer = this.game.time.now + 850;
     }
   }
 

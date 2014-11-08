@@ -37,7 +37,7 @@ function preload() {
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  game.physics.p2.gravity.y = 300;
+  game.physics.p2.gravity.y = 1000;
 
   game.level.create();
   game.player.create();
