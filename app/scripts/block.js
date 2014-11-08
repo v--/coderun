@@ -3,6 +3,7 @@ function Block(game) {
   this.game = game;
   this.isMovable = false;
   this.sprite = null;
+  this.collidableSprite = null;
   this.tween = null;
 }
 
@@ -15,23 +16,33 @@ Block.prototype = {
 
   create: function(x,y) {
     this.logger.info('Creating block');
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.sprite =  this.game.add.sprite(x, y, 'block');
+    this.sprite =  this.game.add.sprite(x, y, '');
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.body.static = true;
     this.sprite.body.gravity = 0;
+
+    this.collidableSprite =  this.game.add.sprite(x, y, 'block');
+    //this.collidableSprite.visible = false;
+    this.collidableSprite.scale.x = 0.3;
+    this.collidableSprite.scale.y = 0.3;
+    this.game.physics.p2.enable(this.collidableSprite);
+    this.collidableSprite.body.kinematic = true;
+    this.collidableSprite.body.gravity = 0;
   },
 
   update: function() {
-
+    this.collidableSprite.reset(this.sprite.x, this.sprite.y);
+    //this.collidableSprite.visible = false;
   },
 
   translate: function(direction, number) {
     if(this.isMovable) {
       var currentX = this.sprite.x;
       var currentY = this.sprite.y;
+<<<<<<< HEAD
+=======
       // switch(direction) {
       //   case 'left':
       //     this.game.physics.arcade.moveToXY(this.sprite, currentX + number, currentY, 100); break;
@@ -44,18 +55,20 @@ Block.prototype = {
       //   default:
       //     break;
       // }
+>>>>>>> 92bb59ed36c87fea804535a54639714181f9ab5a
       var duration = number * 5;
       var ease = Phaser.Easing.Linear.NONE;
 
       switch(direction) {
         case 'left':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX + number}, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ x: currentX + number }, duration, ease, true);
+          break;
         case 'right':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX - number}, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ x: currentX - number }, duration, ease, true); break;
         case 'up':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY - number}, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ y: currentY - number }, duration, ease, true); break;
         case 'down':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY + number}, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ y: currentY + number }, duration, ease, true); break;
         default:
           break;
       }
@@ -63,7 +76,7 @@ Block.prototype = {
   },
 
   setCollisionGroup: function(group) {
-    this.sprite.body.setCollisionGroup(group);
+    this.collidableSprite.body.setCollisionGroup(group);
   }
 }
 
