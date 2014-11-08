@@ -1,6 +1,10 @@
 var Console = require('console');
 var Player = require('player');
+<<<<<<< HEAD
 var Block = require('block');
+=======
+
+>>>>>>> 2bc7eb45caa688d77a1d83f252ad18979b09241e
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -35,8 +39,12 @@ function create() {
 }
 
 function update() {
+<<<<<<< HEAD
   block1.update();
   block2.update();
+=======
+  player.update();
+>>>>>>> 2bc7eb45caa688d77a1d83f252ad18979b09241e
 }
 
 window.addEventListener('resize', function () {
