@@ -1,9 +1,9 @@
-function Console(element, onTilde) {
+function Console(element, onEnter) {
 
   self = this;
 
   this.element = element;
-  this.onTilde = onTilde;
+  this.onEnter = onEnter;
   this.logger = Logger.get('console'),
   this.logger.info('Initialized the console');
 
@@ -39,28 +39,14 @@ Console.prototype = {
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
     self.reset();
-
-    if (self.onTilde)
-      self.onTilde();
-
     self.blur();
+
+    if (self.onEnter)
+      self.onEnter();
   },
 
   onValueChange: function(e) {
-    if (e.key === '`') {
-      this.value = this.value.substr(0, this.value - 1);
-      self.logger.info('Blurring');
-
-      if (self.onTilde)
-        self.onTilde();
-
-      self.blur();
-    }
-
-    else
-      self.logger.info('New value: ' + this.value);
-
-    return true;
+    self.logger.info('New value: ' + this.value);
   }
 }
 

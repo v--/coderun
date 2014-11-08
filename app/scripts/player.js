@@ -36,7 +36,7 @@ Player.prototype = {
     this.arrows = this.game.input.keyboard.createCursorKeys();
 
     this.sprite.body.collideWorldBounds = true;
-    
+
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
   },
 
@@ -45,7 +45,7 @@ Player.prototype = {
     this.sprite.body.velocity.y = 0;
     this.sprite.body.velocity.x = 0;
 
-    if (this.tilde.isDown && !this.game.input.keyboard.disabled) {
+    if (this.tilde.isDown) {
       this.logger.info('Blurring');
       this.game.input.keyboard.disabled = true;
 
