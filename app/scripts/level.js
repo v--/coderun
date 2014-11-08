@@ -4,6 +4,7 @@ var Block = require('block');
 var Label = require ('label');
 var Coffee = require('coffee');
 var Collectable = require('collectable');
+var Bug = require('bug');
 
 var block1 = null;
 var block2 = null;
@@ -11,6 +12,7 @@ var beer = null;
 var exception_pack = null;
 var label = null;
 var coffee = null;
+var bugs = [];
 
 function Level(game) {
   // Phaser.Stage.apply(this, [game]);
@@ -56,6 +58,10 @@ Level.prototype.preload = function() {
   block3.isMovable = true;
   block3.preload();
 
+  var bug = new Bug(this.game);
+  bug.preload();
+  bugs.push(bug);
+
 };
 
 Level.prototype.create = function() {
@@ -86,12 +92,23 @@ Level.prototype.create = function() {
   this.map.setCollisionBetween(0, 100, true, this.layer, true);
   this.game.physics.p2.convertTilemap(this.map, this.layer);
   this.game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+
+  for (var i = bugs.length - 1; i >= 0; i--) {
+    bugs[i].create({
+      x: 950,
+      y: 100
+    });
+  };
 };
 
 Level.prototype.update = function() {
   block1.update();
   block2.update();
   block3.update();
+
+  for (var i = bugs.length - 1; i >= 0; i--) {
+    bugs[i].update();
+  };
 };
 
 module.exports = Level;
