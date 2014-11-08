@@ -1,7 +1,8 @@
- function Player(game) {
+ function Player(game, onTilde) {
 
   this.logger = Logger.get('player');
   this.game = game;
+  this.onTilde = onTilde;
   this.sprite = null;
   this.arrows = null;
   this.wasd = null;
@@ -32,14 +33,20 @@ Player.prototype = {
     this.sprite.allowRotation = false;
     this.sprite.body.fixedRotation = true;
     this.arrows = this.game.input.keyboard.createCursorKeys();
-    this.tick = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
+    this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
   },
 
   update: function() {
     this.sprite.body.setZeroVelocity();
 
-    if (this.tick.isDown) {
+    if (this.tilde.isDown && !this.game.input.keyboard.disabled) {
+      this.logger.info('Blurring');
       this.game.input.keyboard.disabled = true;
+
+      if (this.onTilde)
+        this.onTilde();
+
+      return;
     }
 
     if (this.arrows.right.isDown || this.wasd.right.isDown) {

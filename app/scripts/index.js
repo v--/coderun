@@ -22,13 +22,18 @@ catch (e) {
   mainLogger.error('The game could not be created: ' + e.message);
 }
 
-var console =  new Console(document.getElementById('console'));
+var console =  new Console(document.getElementById('console'), function() {
+  game.input.keyboard.disabled = false;
+});
 
 function preload() {
   level = new Level(game);
   level.preload();
 
-  player = new Player(game);
+  player = new Player(game, function() {
+    console.focus();
+  });
+
   player.preload();
   beer = new Beer(game);
   beer.preload();
@@ -38,7 +43,6 @@ function preload() {
   label.preload();
   beer=new Beer(game);
   beer.preload();
-
 
   block1 = new Block(game);
   block1.preload();
