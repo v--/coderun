@@ -15,7 +15,7 @@ Player.prototype = {
     up: function() {
       if (this.game.time.now > this.jumpTimer) {
         this.sprite.body.moveUp(300);
-        this.jumpTimer = this.game.time.now + 750;
+        this.jumpTimer = this.game.time.now + 950;
       }
     },
 
@@ -48,7 +48,8 @@ Player.prototype = {
   },
 
   shoot: function() {
-
+      var shootTimer = this.game.time.now + 300;
+      var bullet = this.game.add.sprite(32, 32, 'bullet');
   },
 
   create: function() {
@@ -62,7 +63,7 @@ Player.prototype = {
     this.game.physics.p2.enable(this.sprite);
 
     this.sprite.body.fixedRotation = true;
-    this.sprite.body.collideWorldBounds = true;
+    //this.sprite.body.collideWorldBounds = true;
     //this.sprite.body.setCollisionGroup(this.collisionGroup);
     //this.sprite.body.collides(this.game.level.collisionGroup);
     this.sprite.body.velocity.x = 0;
@@ -79,6 +80,8 @@ Player.prototype = {
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
     this.tilde.onDown.add(this.blur.bind(this));
 
+    this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
+
     var keyGroups = ['wasd', 'arrows']
 
     for (i in keyGroups) {
@@ -88,8 +91,8 @@ Player.prototype = {
   },
   update: function() {
     // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
-    this.sprite.body.velocity.y = 0;
-    this.sprite.body.velocity.x = 0;
+    // this.sprite.body.velocity.y = 0;
+    // this.sprite.body.velocity.x = 0;
   }
 }
 
