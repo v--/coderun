@@ -30,9 +30,8 @@ function preload() {
   level = new Level(game);
   level.preload();
 
-  player = new Player(game, function() {
-    console.focus();
-  });
+  player = new Player(game, console.focus.bind(console));
+  console.onEnter = player.focus.bind(player);
 
   player.preload();
   beer = new Beer(game);
@@ -41,7 +40,7 @@ function preload() {
   exception_pack.preload();
   label = new Label(game);
   label.preload();
-  beer=new Beer(game);
+  beer = new Beer(game);
   beer.preload();
 
   block1 = new Block(game);
