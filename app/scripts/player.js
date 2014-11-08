@@ -11,11 +11,12 @@ function Player(game, onTilde) {
 }
 
 Player.prototype = {
+
   move: {
     up: function() {
       if (this.game.time.now > this.jumpTimer) {
-        this.sprite.body.moveUp(300);
-        this.jumpTimer = this.game.time.now + 750;
+        this.sprite.body.moveUp(500);
+        this.jumpTimer = this.game.time.now + 950;
       }
     },
 
@@ -39,16 +40,37 @@ Player.prototype = {
     if (this.onTilde)
       this.onTilde();
 
-    return;
+    return false;
+  },
+
+  shoot: function() {
+    //toastr.info("Exception");
+    var shootTimer = this.game.time.now + 300;
+    var bullet = this.game.add.sprite(this.game.player.sprite.x + 32, this.game.player.sprite.y, 'bullet');
+    this.game.physics.p2.enable(bullet);
+    //bullet.body.moveRight(300);
+    bullet.lifespan = 3000;
+    bullet.body.restitution = 3000;
+    bullet.body.velocity.x = 900;
+    bullet.body.velocity.y = 0;
+    bullet.body.onBeginContact.add(this.bulletHit, this);
+  },
+
+  bulletHit: function(body, shapeA, shapeB, equation) {
+    if(body.sprite != null) {
+      if(body.sprite.key == 'bug') {
+        toastr.info('Bug fixed!');
+        body.sprite.destroy();
+        console.log(equation[0].bodyB.parent.sprite.destroy());
+
+      }
+    }
+
   },
 
   preload: function() {
     this.logger.info("Loading player sprite.");
     this.game.load.spritesheet('player', 'img/man.png', 260, 260);
-  },
-
-  shoot: function() {
-
   },
 
   create: function() {
@@ -62,11 +84,12 @@ Player.prototype = {
     this.game.physics.p2.enable(this.sprite);
 
     this.sprite.body.fixedRotation = true;
-    this.sprite.body.collideWorldBounds = true;
+    //this.sprite.body.collideWorldBounds = true;
     //this.sprite.body.setCollisionGroup(this.collisionGroup);
     //this.sprite.body.collides(this.game.level.collisionGroup);
     this.sprite.body.velocity.x = 0;
     this.sprite.body.damping = 0.9;
+
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
@@ -79,6 +102,11 @@ Player.prototype = {
     this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
     this.tilde.onDown.add(this.blur.bind(this));
 
+    this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.space.onDown.add(this.shoot.bind(this));
+
+    //this.sprite.body.onBeginContact(); 
+
     var keyGroups = ['wasd', 'arrows']
 
     for (i in keyGroups) {
@@ -86,10 +114,11 @@ Player.prototype = {
         this[keyGroups[i]][direction].onHoldCallback = this.move[direction].bind(this);
     }
   },
+
   update: function() {
     // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
-    this.sprite.body.velocity.y = 0;
-    this.sprite.body.velocity.x = 0;
+    // this.sprite.body.velocity.y = 0;
+    // this.sprite.body.velocity.x = 0;
   }
 }
 
