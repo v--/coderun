@@ -16,7 +16,7 @@ Player.prototype = {
 
   create: function() {
     this.logger.info("Creating player.");
-    this.sprite = game.add.sprite(32, 100, 'player');
+    this.sprite = this.game.add.sprite(32, 100, 'player');
   },
 
   update: function() {
@@ -24,3 +24,5 @@ Player.prototype = {
   }
 
 }
+
+module.exports = Player;

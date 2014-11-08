@@ -1,3 +1,9 @@
+var Console = require('console');
+var Player = require('player');
+var Beer = require('beer');
+var ExceptionGun = require('exceptionGun');
+
+
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -15,10 +21,16 @@ var console =  new Console(document.getElementById('console'));
 function preload() {
   player = new Player(game);
   player.preload();
+  beer=new Beer(game);
+  beer.preload();
+  exceptionGun = new ExceptionGun(game);
+  exceptionGun.preload();
 }
 
 function create() {
   player.create();
+  beer.create(0,0);
+  exceptionGun.create(120,120);
 }
 
 function update() {
