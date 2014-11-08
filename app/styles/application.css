@@ -6,12 +6,13 @@ html, body {
 }
 
 #console {
+    z-index: 1;
     position: absolute;
     width: 40%;
     height: 100%;
 }
 
-#input {
+#console > input {
     font-size: 20px;
     color: #fff;
     background-color: #304;
@@ -21,7 +22,7 @@ html, body {
     width: 100%;
 }
 
-#completion {
+#console > completion {
     font-size: 20px;
     position: absolute;
     bottom: 0;

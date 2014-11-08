@@ -26,5 +26,5 @@ exports.config =
       delay: 200
 
   modules:
-    definition: false
-    wrapper: false
+    nameCleaner: (path) ->
+      path.match(/([^\/]*)(?:\/+)?$/)[1]

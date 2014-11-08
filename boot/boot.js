@@ -3,9 +3,12 @@ Logger.useDefaults();
 var mainLogger = Logger.get('main');
 
 axios.get('/application.js').then(function (response) {
-  mainLogger.info('Loaded application.js');
   var scriptText = response.data;
+  var require = globalRequire;
+  delete globalRequire;
+  mainLogger.info('Loaded application.js');
   eval(response.data);
+  require('index');
 }).catch(function (response) {
   var title;
 

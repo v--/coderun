@@ -12,18 +12,17 @@
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/application.css" />
         <base href="/" />
-        <script src="/boot.js"></script>
         <title>Coderun</title>
+        <script src="/boot.js"></script>
+        <script>
+            var globalRequire = require;
+            require('boot');
+        </script>
     </head>
 
     <body>
-        <section id="console" data-rivets="binding">
-            <input id="input" type="text" name="console" autofocus />
-            <span id="completion" data-rv-value="data"></span>
-        </section>
-
-        <main id="phaser">
-        </main>
+        <section id="console"></section>
+        <main id="phaser"></main>
     </body>
 </html>
 
