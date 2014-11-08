@@ -9,11 +9,13 @@ function Player(game) {
 Player.prototype = {
 
   preload: function() {
-    //this.game.load.spritesheet('player', 'images/player.png', 32, 48);
+    logger.info("Loading player sprite.");
+    this.game.load.spritesheet('player', 'img/man.png', 32, 48);
   },
 
   create: function() {
-
+    logger.info("Creating player.");
+    this.sprite = game.add.sprite(32, 100, 'player');
   },
 
   update: function() {

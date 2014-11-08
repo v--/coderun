@@ -5,14 +5,14 @@ var player = null;
 var level = null;
 
 function preload() {
-  
+
   player = new Player(game);
   player.preload();
 
 }
 
 function create() {
-
+  player.create();
 }
 
 function update() {
@@ -20,5 +20,5 @@ function update() {
 }
 
 window.addEventListener('resize', function () {
-	game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
+  game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
 });
