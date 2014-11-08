@@ -2,6 +2,15 @@ var ExceptionPack = require('exception_pack');
 var Beer = require('beer');
 var Block = require('block');
 var Label = require ('label');
+var Coffee = require('coffee');
+var Collectable = require('collectable');
+
+var block1 = null;
+var block2 = null;
+var beer = null;
+var exception_pack = null;
+var label = null;
+var coffee = null;
 
 function Level(game) {
   // Phaser.Stage.apply(this, [game]);
@@ -34,8 +43,8 @@ Level.prototype.preload = function() {
   exception_pack.preload();
   label = new Label(this.game);
   label.preload();
-  beer=new Beer(this.game);
-  beer.preload();
+  coffee = new Coffee(this.game);
+  coffee.preload();
 
   block1 = new Block(this.game);
   block1.preload();
@@ -55,9 +64,12 @@ Level.prototype.create = function() {
   this.map.addTilesetImage('tileset_13');
   this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
-  beer.create(0,0);
+  beer.create(300,300);
   exception_pack.create(120,120);
-  label.create();
+  label.create(0,100);
+
+  //coffee.create(300,300);
+
   block1.create(0,0);
   block2.create(100,100);
   block3.create(0, 300);
