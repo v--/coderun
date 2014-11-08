@@ -50,7 +50,6 @@ Level.prototype.preload = function() {
 };
 
 Level.prototype.create = function() {
-  this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
 
   this.map = this.game.add.tilemap('map');
   this.map.addTilesetImage('tileset_13');
@@ -65,10 +64,8 @@ Level.prototype.create = function() {
 
   //block3.setCollisionGroup(this.collisionGroup);
 
-  // this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
-
   this.layer = this.map.createLayer('solid');
-  this.layer.debug = true;
+  //this.layer.debug = true;
   this.layer.fixedToCamera = false;
 
   this.layer.resizeWorld();

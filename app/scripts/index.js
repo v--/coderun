@@ -41,6 +41,7 @@ function create() {
 
   game.level.create();
   game.player.create();
+  game.camera.follow(game.player.sprite);
 
 }
 
