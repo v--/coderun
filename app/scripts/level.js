@@ -4,6 +4,7 @@ function Level(game) {
   this.game             = game;
   this.backgroundSprite = null;
   this.map              = null;
+  this.collisionGroup   = null;
 }
 
 Level.prototype = Object.create(Phaser.Stage.prototype);
@@ -15,7 +16,8 @@ Level.prototype.preload = function() {
 };
 
 Level.prototype.create = function() {
-  this.game.physics.startSystem(Phaser.Physics.P2JS);
+  this.collisionGroup = this.game.physics.p2.createCollisionGroup();
+
   // this.backgroundSprite = this.game.add.sprite(0, 0, 'background', 'env');
 
   // this.map = this.game.add.tilemap('map');
