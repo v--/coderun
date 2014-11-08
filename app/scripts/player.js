@@ -61,7 +61,7 @@ Player.prototype = {
       if(body.sprite.key == 'bug') {
         toastr.info('Bug fixed!');
         body.sprite.destroy();
-        console.log(equation);
+        console.log(equation[0].bodyB.parent.sprite.destroy());
 
       }
     }
