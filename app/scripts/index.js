@@ -6,6 +6,7 @@ var Level = require('level');
 var Beer = require('beer');
 var ExceptionGun = require('exceptionGun');
 var Block = require('block');
+var Label = require ('label');
 
 var phaserContainer = document.getElementById('phaser');
 var player = null;
