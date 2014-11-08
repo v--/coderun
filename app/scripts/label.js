@@ -12,4 +12,6 @@ Label.prototype.preload = Collectable.prototype.preload;
 
 Label.prototype.create=Collectable.prototype.create;
 
+Label.prototype.removee=Collectable.prototype.removee;
+
 module.exports = Label;
