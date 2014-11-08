@@ -28,4 +28,8 @@ Console.prototype = {
   }
 }
 
-module.exports = Console
+module.exports = Console;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6b60023418a1742b63f7371fdfc312f29b47de71

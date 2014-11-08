@@ -18,6 +18,8 @@ Player.prototype = {
     this.game.physics.startSystem(Phaser.Physics.P2JS);
     this.logger.info("Creating player.");
     this.sprite = this.game.add.sprite(32, 100, 'player');
+<<<<<<< HEAD
+=======
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
@@ -32,6 +34,7 @@ Player.prototype = {
     this.sprite.allowRotation = false;
     this.sprite.body.fixedRotation = true;
     this.arrows = this.game.input.keyboard.createCursorKeys();
+>>>>>>> 2bc7eb45caa688d77a1d83f252ad18979b09241e
   },
 
   update: function() {
@@ -47,4 +50,12 @@ Player.prototype = {
 
 }
 
+<<<<<<< HEAD
+module.exports = Player;
+=======
+<<<<<<< HEAD
+module.exports = Player;
+=======
 module.exports = Player
+>>>>>>> 2bc7eb45caa688d77a1d83f252ad18979b09241e
+>>>>>>> 6b60023418a1742b63f7371fdfc312f29b47de71
