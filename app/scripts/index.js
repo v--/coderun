@@ -3,7 +3,6 @@ var Player = require('player');
 var Beer = require('beer');
 var ExceptionGun = require('exceptionGun');
 
-
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -34,7 +33,7 @@ function create() {
 }
 
 function update() {
-
+  player.update();
 }
 
 window.addEventListener('resize', function () {

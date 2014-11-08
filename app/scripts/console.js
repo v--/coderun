@@ -29,3 +29,4 @@ Console.prototype = {
 }
 
 module.exports = Console;
+
