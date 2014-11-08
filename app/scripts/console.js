@@ -9,8 +9,10 @@ function Console(element, onEnter) {
 
   this.input = document.createElement('input');
   this.compl = document.createElement('span');
+  this.history = document.createElement('div');
   this.element.appendChild(this.input);
   this.element.appendChild(this.compl);
+  this.element.appendChild(this.history);
   this.logger.info('Created sub elements');
 
   this.input.addEventListener('change', this.onSubmit);
@@ -26,6 +28,7 @@ function Console(element, onEnter) {
 
 Console.prototype = {
   value: '',
+  messages: [],
 
   blur: function() {
     this.reset();
@@ -46,17 +49,23 @@ Console.prototype = {
 
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
+    self.messages.unshift(this.value);
+
+    var message = document.createElement('div');
+    message.innerHTML = this.value;
+    self.history.appendChild(message);
+
     self.blur();
   },
 
   tildeCheck: function(e) {
-    if (e.key === '`');
+    if (e.key === '`')
       this.blur();
   },
 
   onValueChange: function(e) {
-    self.logger.info('New value: ' + this.value);
-  }
+    self.logger.debug('New value: ' + this.value);
+  },
 }
 
 module.exports = Console;
