@@ -3,8 +3,8 @@ A dynamic, action-packed puzzle
 
 Player:
 * Programmer
-⋅⋅* throw exceptions(fire bullets)
-⋅⋅*  goto label(teleport)
+ * throw exceptions (fire bullets)
+ * goto label (teleport)
 
 Environment:
 * Side-scrolling platform made of blocks of code
