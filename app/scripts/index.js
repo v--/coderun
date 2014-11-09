@@ -36,6 +36,10 @@ function create() {
   game.level.create();
   game.player.create();
   game.camera.follow(game.player.sprite);
+
+  // console.log(game.level.blocks.filter(function(block) {
+  // 	return block.isMovable;
+  // }))
 }
 
 function update() {
