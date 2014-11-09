@@ -1,10 +1,12 @@
-function Block(game) {
+function Block(game, movable, x, y) {
   this.logger = Logger.get('block');
   this.game = game;
   this.isMovable = false;
   this.sprite = null;
   this.collidableSprite = null;
   this.tween = null;
+  this.x = x;
+  this.y = y;
 }
 
 Block.prototype = {
@@ -16,7 +18,7 @@ Block.prototype = {
 
   create: function(x,y) {
     this.logger.info('Creating block');
-    this.sprite =  this.game.add.sprite(x, y, '');
+    this.sprite =  this.game.add.sprite(this.x, this.y, '');
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
     this.game.physics.arcade.enable(this.sprite);

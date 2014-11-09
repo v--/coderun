@@ -1,8 +1,9 @@
 var Collectable = require('collectable');
-function Bug(game) {
+function Bug(game, x, y) {
 
     this.game = game;
-    this.options = null;
+    this.x = x;
+    this.y = y;
 
     this.walkOffsetX = 0;
     this.tween = null;
@@ -15,8 +16,8 @@ Bug.prototype.preload = function () {
     this.game.load.spritesheet('bug', 'img/bug_black.png', 36, 20, 2);
 }
 
-Bug.prototype.create = function (options) {
-    this.sprite               = this.game.add.sprite(options.x, options.y, 'bug');
+Bug.prototype.create = function () {
+    this.sprite               = this.game.add.sprite(this.x, this.y, 'bug');
     this.sprite.allowRotation = false;
     this.sprite.scale.x       = 1.2;
     this.sprite.scale.y       = 1.2;

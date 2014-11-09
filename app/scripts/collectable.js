@@ -1,8 +1,10 @@
-function Collectable(game){
+function Collectable(game, x, y){
   this.game   = game;
   this.name   = null;
   this.image  = null;
   this.sprite = null;
+  this.x = x;
+  this.y = y;
 }
 
 Collectable.prototype = {
@@ -11,8 +13,8 @@ Collectable.prototype = {
     this.game.load.image(this.name, this.image);
   },
 
-  create: function(x,y) {
-    this.sprite = this.game.add.sprite(x,y,this.name);
+  create: function() {
+    this.sprite = this.game.add.sprite(this.x, this.y, this.name);
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.x = 1;
     this.sprite.scale.y = 1;

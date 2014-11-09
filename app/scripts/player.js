@@ -6,7 +6,6 @@ function Player(game) {
   this.arrows = null;
   this.wasd = null;
   this.jumpTimer = 0;
-  this.collisionGroup = null;
   this.exceptions = 1;
   this.beers = 0;
   this.coffee = 0;
@@ -42,18 +41,22 @@ Player.prototype = {
       if(body.sprite != null) {
         switch(body.sprite.key) {
         case 'exception_pack':
+          toastr.info('Gun ammo!');
           body.sprite.destroy();
           this.exceptions += 1;
           break;
         case 'beer':
+          toastr.info('BEER!');
           body.sprite.destroy();
           this.beers += 1;
           break;
         case 'coffee':
+          toastr.info('Coffee...');
           body.sprite.destroy();
           this.coffee += 1;
           break;
         case 'label':
+          toastr.info('A label.');
           body.sprite.destroy();
           this.labels += 1;
           break;
@@ -112,7 +115,6 @@ Player.prototype = {
   },
 
   create: function() {
-    this.collisionGroup = this.game.physics.p2.createCollisionGroup();
     this.logger.info("Creating player.");
     this.sprite = this.game.add.sprite(32, 100, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
@@ -153,7 +155,7 @@ Player.prototype = {
   },
 
   update: function() {
-    this.logger.info(this.direction);
+    // this.logger.info(this.direction);
     // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
     // this.sprite.body.velocity.y = 0;
     // this.sprite.body.velocity.x = 0;
