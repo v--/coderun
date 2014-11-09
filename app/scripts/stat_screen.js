@@ -1,3 +1,4 @@
+var Block = require('block');
 var Exit = require('exit');
 
 function StatScreen(game, newGame, currentLevel) {
@@ -5,11 +6,13 @@ function StatScreen(game, newGame, currentLevel) {
   this.newGame = newGame;
   this.currentLevel = currentLevel;
   this.exit = new Exit(this.newGame, 800, 330);
+  this.floor = new Block(this.newGame, false, 0, 0, 0.3, 0.3);
 }
 
 
 StatScreen.prototype = {
   preload: function() {
+    this.floor.preload();
     this.exit.preload();
   },
 
@@ -18,7 +21,7 @@ StatScreen.prototype = {
     this.newGame.fixedBugs += this.game.fixedBugs;
     this.newGame.player.fixedBugs += this.game.player.fixedBugs;
     this.newGame.player.coffee += this.game.player.coffee;
-    
+    this.floor.create();
     var text = "Level Stats" 
              + "\n Level:" + this.currentLevel
              + "\n Bugs fixed:" + this.game.fixedBugs + "/" + this.game.bugs
@@ -33,6 +36,7 @@ StatScreen.prototype = {
   },
 
   update: function() {
+    this.floor.update();
     this.exit.update();
   }
 }

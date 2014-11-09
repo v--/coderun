@@ -19,8 +19,8 @@ Player.prototype = {
 
   move: {
     up: function() {
-      if (this.game.time.now > this.jumpTimer) {
-        this.sprite.body.moveUp(500);
+      if (this.game.time.now > this.jumpTimer && this.checkIfCanJump()) {
+        this.sprite.body.moveUp(700);
         this.jumpTimer = this.game.time.now + 950;
       }
     },
@@ -37,6 +37,27 @@ Player.prototype = {
       this.sprite.scale.x = 0.3;
     }
   },
+
+  checkIfCanJump: function() {
+
+    var yAxis = p2.vec2.fromValues(0, 1);
+    var result = false;
+
+    for (var i = 0; i < this.game.physics.p2.world.narrowphase.contactEquations.length; i++)
+    {
+        var c = this.game.physics.p2.world.narrowphase.contactEquations[i];
+
+        if (c.bodyA === this.sprite.body.data || c.bodyB === this.sprite.body.data)
+        {
+            var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
+            if (c.bodyA === this.sprite.body.data) d *= -1;
+            if (d > 0.5) result = true;
+        }
+    }
+    
+    return result;
+
+},
 
   playerTouch: function(body, shapeA, shapeB, equation) {
     if(body != null) {
