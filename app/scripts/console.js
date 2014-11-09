@@ -77,7 +77,7 @@ Console.prototype = {
 
   onSubmit: function(e) {
     var result = {
-      text:this.value
+      text: this.value
     };
 
     try {
@@ -98,7 +98,8 @@ Console.prototype = {
   },
 
   onValueChange: function(e) {
-    self.logger.debug('New value: ' + this.value);
+    if (this.value)
+      self.logger.debug('New value: ' + this.value);
   },
 }
 
