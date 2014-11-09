@@ -20,7 +20,9 @@ Exit.prototype = {
     this.sprite.scale.x = 1.3;
     this.sprite.scale.y = 1.3;
     this.game.physics.p2.enable(this.sprite);
-    this.sprite.body.kinematic = true;
+    //this.sprite.body.kinematic = true;
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.fixedRotation = true;
   },
 
   update: function() {

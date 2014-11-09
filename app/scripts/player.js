@@ -119,7 +119,7 @@ Player.prototype = {
 
   preload: function() {
     this.logger.info("Loading player sprite.");
-    this.game.load.spritesheet('player', 'img/man.png', 260, 260);
+    this.game.load.spritesheet('player', 'img/man.png', 214, 231);
   },
 
   create: function() {

@@ -82,7 +82,7 @@ function create() {
   game.player.create();
   game.camera.follow(game.player.sprite);
 
-  game.level.entities.filter(function(entity) {
+  game.levels[currentLevel].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;
   })[0].move('right', 1);
 }
