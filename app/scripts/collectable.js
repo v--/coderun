@@ -1,8 +1,8 @@
 function Collectable(game){
-  this.game = game;
-  this.name = null
-  this.image = null;
-  this.sprite=null;
+  this.game   = game;
+  this.name   = null;
+  this.image  = null;
+  this.sprite = null;
 }
 
 Collectable.prototype = {
@@ -18,6 +18,9 @@ Collectable.prototype = {
     this.sprite.scale.y = 1;
     this.game.physics.p2.enable(this.sprite);
     //this.sprite.body.kinematic = true;
+    this.sprite.body.fixedRotation = true;
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.damping = 0.9;
   },
 
   update: function() {

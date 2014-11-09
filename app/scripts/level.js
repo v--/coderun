@@ -77,9 +77,9 @@ Level.prototype.create = function() {
 
   beer.create(300,400);
 
-  exception_pack.create(320, 540);
+  exception_pack.create(320, 440);
 
-  label.create(200,540);
+  label.create(200,440);
 
   coffee.create(300,300);
 
