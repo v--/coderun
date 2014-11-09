@@ -43,12 +43,12 @@ function init() {
   game.levels.push(new Level(game, 1));
   game.levels[0].entities.push(new Map(this.game, 1));
   game.levels[0].entities.push(new Label(this.game, 200, 440));
-  game.levels[0].entities.push(new ExceptionPack(this.game, 320, 440));
+  game.levels[0].entities.push(new ExceptionPack(this.game, 1300, 100));
   game.levels[0].entities.push(new Coffee(this.game, 300, 300));
-  game.levels[0].entities.push(new Block(this.game, false, 400, 200));
+  game.levels[0].entities.push(new Block(this.game, true, 515, 500));
   game.levels[0].entities.push(new Block(this.game, false, 100, 100));
   game.levels[0].entities.push(new Block(this.game, true, 100, 300));
-  game.levels[0].entities.push(new Bug(this.game, 950, 100));
+  game.levels[0].entities.push(new Bug(this.game, 2000, 100));
   game.levels[0].entities.push(new Exit(this.game, 2300, 550));
 
   game.levels.push(statScreen);
@@ -57,15 +57,16 @@ function init() {
   //console.log(game.levels);
 
   game.levels.push(new Level(game, 1));
-  game.levels[2].entities.push(new Map(this.game, 1));
+  game.levels[2].entities.push(new Map(this.game, 2));
   game.levels[2].entities.push(new Label(this.game, 200, 440));
   game.levels[2].entities.push(new ExceptionPack(this.game, 320, 440));
   game.levels[2].entities.push(new Coffee(this.game, 300, 300));
   game.levels[2].entities.push(new Block(this.game, false, 400, 200));
-  game.levels[2].entities.push(new Block(this.game, false, 100, 100));
-  game.levels[2].entities.push(new Block(this.game, true, 100, 300));
+  game.levels[2].entities.push(new Block(this.game, true, 1400, 100));
+  game.levels[2].entities.push(new Block(this.game, true, 500, 300));
   game.levels[2].entities.push(new Bug(this.game, 950, 100));
   game.levels[2].entities.push(new Bug(this.game, 1250, 100));
+  game.levels[2].entities.push(new Bug(this.game, 1150, 100));
   game.levels[2].entities.push(new Exit(this.game, 2300, 550));
 
   game.levels.push(statScreen);
