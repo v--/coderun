@@ -16,7 +16,7 @@
         <script src="/boot.js"></script>
         <script>
             var globalRequire = require;
-            require('boot');
+            window.onload = require.partial('boot');
         </script>
     </head>
 
