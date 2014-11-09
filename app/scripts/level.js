@@ -12,7 +12,9 @@ var beer = null;
 var exception_pack = null;
 var label = null;
 var coffee = null;
+var collectables = null;
 var bugs = [];
+
 
 function Level(game) {
   // Phaser.Stage.apply(this, [game]);
@@ -41,10 +43,13 @@ Level.prototype.preload = function() {
 
   beer = new Beer(this.game);
   beer.preload();
+
   exception_pack = new ExceptionPack(this.game);
   exception_pack.preload();
+
   label = new Label(this.game);
   label.preload();
+
   coffee = new Coffee(this.game);
   coffee.preload();
 
@@ -70,11 +75,21 @@ Level.prototype.create = function() {
   this.map.addTilesetImage('tileset_13');
   this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
-  beer.create(300,300);
-  exception_pack.create(120,120);
-  label.create(0,100);
-
   //coffee.create(300,300);
+
+  collectables = this.game.add.group();
+  collectables.enableBody = true;
+
+  for (var i = 0; i < 1 ; i++){
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'label');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'coffee');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'exception_pack');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'beer');
+
+  }
+
+ // this.physics.arcade.overlap(this.player, collectobles, this.handle, null, this);
+
 
   block1.create(0,0);
   block2.create(100,100);
@@ -108,9 +123,11 @@ Level.prototype.update = function() {
   block2.update();
   block3.update();
 
+
   for (var i = bugs.length - 1; i >= 0; i--) {
     bugs[i].update();
   };
+  
 };
 
 module.exports = Level;
