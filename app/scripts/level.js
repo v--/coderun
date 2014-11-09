@@ -21,7 +21,7 @@ Level.prototype = {
   },
 
   create: function() {
-  toastr.info('Level ' + this.game.currentLevel);
+  //toastr.info('Level ' + this.game.currentLevel);
   this.entities.forEach(function(entity) {
     entity.create();
   });
