@@ -10,6 +10,7 @@ var Bug = require('bug');
 var Map = require('map');
 var Exit = require('exit');
 var StatScreen = require('stat_screen');
+var Interpreter = require('interpreter');
 
 var htmlConsole =  new Console(document.getElementById('console'));
 var phaserContainer = document.getElementById('phaser');
@@ -75,10 +76,7 @@ function create() {
   game.levels[currentLevel].create();
   game.player.create();
   game.camera.follow(game.player.sprite);
-
-  game.levels[currentLevel].entities.filter(function(entity) {
-    return entity instanceof Block && entity.isMovable;
-  })[0].move('right', 1);
+  initInterpreters();
 }
 
 function update() {
@@ -87,7 +85,26 @@ function update() {
   }
   game.levels[currentLevel].update();
   game.player.update();
+}
 
+function initInterpreters() {
+  var moveable = game.levels[currentLevel].entities.filter(function(entity) {
+    return entity instanceof Block && entity.isMovable;
+  });
+
+  var move = new Interpreter([function(text) {
+    var match = text.match(/(block)(\d+)/)
+
+    if (!match)
+      throw new Error('Invalid block name');
+
+    if (Number(match[2]) > moveable.length + 1)
+      throw new Error('Invalid block index');
+  }, /(up|down|left|right)/, /\d+/], function(args) {
+    moveable[args[0].replace('block', '') - 1].move(args[1], args[2] || 1);
+  });
+
+  htmlConsole.interpreters.move = move;
 }
 
 function setLevel() {
