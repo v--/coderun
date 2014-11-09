@@ -27,11 +27,13 @@ Bug.prototype.create = function () {
     this.game.physics.p2.enable(this.sprite);
     this.sprite.body.fixedRotation = true;
 
+    var timeout = 700+Math.floor(Math.random()*500);
+    // var timeout = 500;
     this.sprite.animations.add('bug');
 
     this.sprite.animations.frame = 1;
     this.sprite.animations.play('bug', 1, true);
-    this.game.add.tween(this.sprite.body).to( { x: this.sprite.x + 25}, 1000, Phaser.Easing.Elastic.Out ).to( { x: this.sprite.x - 25}, 1000, Phaser.Easing.Elastic.Out, true).loop();
+    this.game.add.tween(this.sprite.body).to( { x: this.sprite.x + 25}, timeout, Phaser.Easing.Elastic.Out ).to( { x: this.sprite.x - 25}, timeout, Phaser.Easing.Elastic.Out, true).loop();
 }
 
 Bug.prototype.update = function () {
