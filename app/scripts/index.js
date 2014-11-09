@@ -92,16 +92,15 @@ function initInterpreters() {
     return entity instanceof Block && entity.isMovable;
   });
 
-  var move = new Interpreter([function(text) {
-    var match = text.match(/(block)(\d+)/)
+  var move = new Interpreter(
+    [/(block)(\d+)/, /(up|down|left|right)/, /\d*/],
+    function(args) {
+      var blockIndex = Number(args[0].replace('block', '')) - 1;
 
-    if (!match)
-      throw new Error('Invalid block name');
+      if (blockIndex > moveable.length - 1)
+        throw new Error('Invalid block index');
 
-    if (Number(match[2]) > moveable.length + 1)
-      throw new Error('Invalid block index');
-  }, /(up|down|left|right)/, /\d+/], function(args) {
-    moveable[args[0].replace('block', '') - 1].move(args[1], args[2] || 1);
+      moveable[blockIndex].move(args[1], args[2] || 1);
   });
 
   htmlConsole.interpreters.move = move;
