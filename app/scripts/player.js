@@ -1,8 +1,7 @@
-function Player(game, onTilde) {
+function Player(game) {
 
   this.logger = Logger.get('player');
   this.game = game;
-  this.onTilde = onTilde;
   this.sprite = null;
   this.arrows = null;
   this.wasd = null;
@@ -27,20 +26,6 @@ Player.prototype = {
     right: function() {
       this.sprite.body.velocity.x = 300;
     }
-  },
-
-  focus: function() {
-    this.game.input.keyboard.disabled = false;
-  },
-
-  blur: function() {
-    this.logger.info('Blurring');
-    this.game.input.keyboard.disabled = true;
-
-    if (this.onTilde)
-      this.onTilde();
-
-    return false;
   },
 
   shoot: function() {
@@ -99,13 +84,10 @@ Player.prototype = {
 
     this.arrows = this.game.input.keyboard.createCursorKeys();
 
-    this.tilde = this.game.input.keyboard.addKey(Phaser.Keyboard.TILDE);
-    this.tilde.onDown.add(this.blur.bind(this));
-
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.space.onDown.add(this.shoot.bind(this));
 
-    //this.sprite.body.onBeginContact(); 
+    //this.sprite.body.onBeginContact();
 
     var keyGroups = ['wasd', 'arrows']
 

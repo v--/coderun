@@ -1,11 +1,10 @@
-function Console(element, onEnter) {
+function Console(element) {
 
   self = this;
 
   this.messages = [],
   this.interpreter = [],
   this.element = element;
-  this.onEnter = onEnter;
   this.logger = Logger.get('console'),
   this.logger.info('Initialized the console');
 
@@ -18,7 +17,6 @@ function Console(element, onEnter) {
   this.logger.info('Created sub elements');
 
   this.input.addEventListener('change', this.onSubmit);
-  // this.input.addEventListener('keydown', this.tildeCheck);
 
   changeEvents = ['keydown', 'cut', 'paste'];
 
@@ -32,11 +30,6 @@ Console.prototype = {
   value: '',
 
   blur: function() {
-    this.reset();
-
-    if (self.onEnter)
-      self.onEnter();
-
     this.input.blur();
   },
 
@@ -57,11 +50,6 @@ Console.prototype = {
     self.history.appendChild(message);
 
     self.blur();
-  },
-
-  tildeCheck: function(e) {
-    if (e.key === '`')
-      this.blur();
   },
 
   onValueChange: function(e) {
