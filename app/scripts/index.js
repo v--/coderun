@@ -16,9 +16,12 @@ var htmlConsole =  new Console(document.getElementById('console'));
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
+var currentScreen = 0;
+var currentLevel = 0;
+
 var statScreen = null;
 var levelStat = null;
-var currentLevel = 0;
+
 var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
 mainLogger.info('Game initialized');
 
@@ -28,7 +31,6 @@ function init() {
   game.physics.startSystem(Phaser.Physics.P2JS);
   game.physics.p2.gravity.y = 1000;
 
-  game.currentLevel = currentLevel + 1;
   game.levelCleared = false;
   game.bugs = 0;
   game.fixedBugs = 0;
@@ -46,7 +48,8 @@ function init() {
   game.levels[0].entities.push(new Exit(this.game, 2300, 550));
 
   game.levels.push(statScreen);
-  //game.levels.push(new StatScreen(game, game.player, currentLevel));
+
+  //game.levels.push(new StatScreen(game, game.player, currentScreen));
 
   //console.log(game.levels);
   
@@ -66,33 +69,37 @@ function init() {
 
   game.levels.push(statScreen);
 
+  if(game.levels[currentScreen] instanceof Level) {
+    currentLevel += 1;
+  }
 }
 
 function preload() {
-  game.levels[currentLevel].preload();
+  game.levels[currentScreen].preload();
   game.player.preload();
 }
 
 function create() {
-  game.levels[currentLevel].create();
+  game.levels[currentScreen].create();
   game.player.create();
-  game.camera.follow(game.player.sprite);
+  // game.camera.follow(game.player.sprite);
   game.camera.follow(game.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
-  initInterpreters();
+
   createLevelStat();
+  initInterpreters();
 }
 
 function update() {
   if(game.levelCleared) {
-    setLevel(game.currentLevel);
+    setLevel();
   }
-  game.levels[currentLevel].update();
+  game.levels[currentScreen].update();
   game.player.update();
   updateLevelStat();
 }
 
 function initInterpreters() {
-  var moveable = game.levels[currentLevel].entities.filter(function(entity) {
+  var moveable = game.levels[currentScreen].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;
   });
 
@@ -111,15 +118,15 @@ function initInterpreters() {
 }
 
 function setLevel() {
-  currentLevel += 1;
+  currentScreen += 1;
   var newGame = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
-  statScreen = new StatScreen(game, newGame, currentLevel);
+  statScreen = new StatScreen(game, newGame, currentScreen);
   game.destroy();
   game = newGame;
 }
 
 function createLevelStat() {
-  text = "Level: " + game.currentLevel
+  text = "Level: " + currentLevel
          + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
          + "\nExceptions : " + game.player.exceptions
          + "\nCoffee: " + game.player.coffee
@@ -132,7 +139,7 @@ function createLevelStat() {
 }
 
 function updateLevelStat() {
-  levelStat.setText("Level: " + game.currentLevel
+  levelStat.setText("Level: " + currentLevel
              + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
              + "\nExceptions : " + game.player.exceptions
              + "\nCoffee: " + game.player.coffee
