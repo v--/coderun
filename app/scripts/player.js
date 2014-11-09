@@ -41,7 +41,7 @@ Player.prototype = {
       if(body.sprite != null) {
         toastr.info(body.sprite.key);
         switch(body.sprite.key) {
-        case 'exceptionPack':
+        case 'exception_pack':
           body.sprite.destroy();
           this.exceptions += 1;
           break;

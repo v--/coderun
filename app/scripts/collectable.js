@@ -2,7 +2,6 @@ function Collectable(game){
   this.game = game;
   this.name = null
   this.image = null;
-  this.isVisible = true;
   this.sprite=null;
 }
 
@@ -13,6 +12,7 @@ Collectable.prototype = {
   },
 
   create: function(x,y) {
+    game.physics.startSystem(Phaser.Physics.P2JS);
     this.sprite = this.game.add.sprite(x,y,this.name);
     this.sprite.scale.x = 1;
     this.sprite.scale.y =1;
@@ -21,24 +21,10 @@ Collectable.prototype = {
   },
 
   update: function() {
+
     
-   // game.physics.arcade.overlap(player, collectable, collect, null, this);
-  },
-
-  removee: function(){
-    this.isVisible = false;
-    this.sprite.kill();
   }
-
-
 }
- // function collect (player, collectable) {
-  
-  //  collectable.kill();
- 
-//}
-
-
 
 
 module.exports = Collectable;

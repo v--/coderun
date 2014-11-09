@@ -12,7 +12,9 @@ var beer = null;
 var exception_pack = null;
 var label = null;
 var coffee = null;
+var collectables = null;
 var bugs = [];
+
 
 function Level(game) {
   // Phaser.Stage.apply(this, [game]);
@@ -23,8 +25,8 @@ function Level(game) {
 
   this.layer            = null;
   this.player           = null;
-  this.tileset           = null;
-
+  this.tileset          = null;
+  this.blocks           = [];
 
   this.tilesetRef = null;
   this.tilemapRef = null;
@@ -73,17 +75,27 @@ Level.prototype.create = function() {
   this.map.addTilesetImage('tileset_13');
   this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
-  beer.create(300,400);
-
-  exception_pack.create(320, 540);
-
-  label.create(200,540);
-
   //coffee.create(300,300);
+
+  collectables = this.game.add.group();
+  collectables.enableBody = true;
+
+  for (var i = 0; i < 1 ; i++){
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'label');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'coffee');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'exception_pack');
+    collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'beer');
+
+  }
+
+ // this.physics.arcade.overlap(this.player, collectobles, this.handle, null, this);
+
 
   block1.create(0,0);
   block2.create(100,100);
   block3.create(0, 300);
+
+  this.blocks = [block1, block2, block3];
 
   block2.translate('left', 300);
   //block3.setCollisionGroup(this.collisionGroup);
@@ -111,9 +123,11 @@ Level.prototype.update = function() {
   block2.update();
   block3.update();
 
+
   for (var i = bugs.length - 1; i >= 0; i--) {
     bugs[i].update();
   };
+  
 };
 
 module.exports = Level;
