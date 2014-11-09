@@ -12,19 +12,23 @@ function Map(game, level) {
 
 Map.prototype = {
   preload: function() {
-    // this.tilesetRef = this.game.load.image('tileset_13', 'img/tileset_13.png');
-    this.tilesetRef = this.game.add.text(0, 0, scriptText);
+    this.tilesetRef = this.game.load.image('tileset_13', 'img/tileset_13.png');
+    // this.tilesetRef = this.game.add.text(0, 0, scriptText.substr(0, 2000).replace(/a/g, '\n'), {
+    // 	font: '15px Mono',
+    // 	fill: '#B5A'
+    // });
+
     this.tilemapRef = this.game.load.tilemap('map', 'maps/level'+ this.currentLevel +'.json', null, Phaser.Tilemap.TILED_JSON);
   },
 
   create: function() {
     this.map = this.game.add.tilemap('map');
-    // this.map.addTilesetImage('tileset_13');
+    this.map.addTilesetImage('tileset_13');
 
     this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
     this.layer = this.map.createLayer('solid');
-    this.layer.debug = true;
+    // this.layer.debug = true;
 
     this.layer.resizeWorld();
 
