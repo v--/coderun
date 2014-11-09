@@ -1,5 +1,5 @@
 Logger.useDefaults();
-// Logger.setLevel(Logger.OFF);
+Logger.setLevel(Logger.OFF);
 var mainLogger = Logger.get('main');
 
 axios.get('/application.js').then(function (response) {

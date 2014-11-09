@@ -21,11 +21,11 @@ exports.config =
     stylesheets:
       joinTo: 'application.css'
 
-  plugins:
-    autoReload:
-      enabled: true
-      port: 9485
-      delay: 200
+  # plugins:
+  # 	autoReload:
+  # 		enabled: true
+  # 		port: 9485
+  # 		delay: 200
 
   modules:
     nameCleaner: (path) ->

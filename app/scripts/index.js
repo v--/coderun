@@ -22,7 +22,6 @@ var currentLevel = 0;
 var statScreen = null;
 var levelStat = null;
 
-
 var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
 mainLogger.info('Game initialized');
 
