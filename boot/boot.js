@@ -3,7 +3,8 @@ Logger.useDefaults();
 var mainLogger = Logger.get('main');
 
 axios.get('/application.js').then(function (response) {
-  var scriptText = response.data;
+  var background = document.getElementById('background');
+  background.innerHTML = response.data;
   var require = globalRequire;
   delete globalRequire;
   mainLogger.info('Loaded application.js');

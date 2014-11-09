@@ -92,6 +92,7 @@ function update() {
   if(game.levelCleared) {
     setLevel();
   }
+  background.style.right = game.camera.view.x + 'px';
   game.levels[currentScreen].update();
   game.player.update();
   updateLevelStat();
@@ -100,6 +101,10 @@ function update() {
 function initInterpreters() {
   var moveable = game.levels[currentScreen].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;
+  });
+
+  moveable.forEach(function(block, index) {
+    game.add.text(block.x - 40, block.y - 10, 'block' + index, {});
   });
 
   var move = new Interpreter(
