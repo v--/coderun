@@ -52,10 +52,15 @@ Console.prototype = {
     }
   },
 
+  interpret: function(value) {
+    if (typeof value === 'string' || value instanceof String)
+      console.log('yay');
+  },
+
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
     self.messages = self.messages.slice(0, 4).reverse();
-    self.messages.push(this.value);
+    self.messages.push(this.value + ' ' + self.interpret(this.value));
     self.populateMessages();
   },
 

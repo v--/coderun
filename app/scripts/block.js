@@ -55,10 +55,10 @@ Block.prototype = {
 
       switch(direction) {
         case 'left':
-          directionTo = { x: currentX = offset };
+          directionTo = { x: currentX - offset };
           break;
         case 'right':
-          directionTo = { x: currentX - offset };
+          directionTo = { x: currentX + offset };
           break;
         case 'up':
           directionTo = { y: currentY - offset };
