@@ -92,10 +92,16 @@ function update() {
   if(game.levelCleared) {
     setLevel();
   }
+
   background.style.right = game.camera.view.x + 'px';
   game.levels[currentScreen].update();
   game.player.update();
   updateLevelStat();
+
+  game.levels[currentScreen].blockLabels.forEach(function(label) {
+    label.x = label.block.sprite.x - 40;
+    label.y = label.block.sprite.y - 10;
+  });
 }
 
 function initInterpreters() {
@@ -103,8 +109,10 @@ function initInterpreters() {
     return entity instanceof Block && entity.isMovable;
   });
 
-  moveable.forEach(function(block, index) {
-    game.add.text(block.x - 40, block.y - 10, 'block' + (index + 1), {});
+  game.levels[currentScreen].blockLabels = moveable.map(function(block, index) {
+    label = game.add.text(block.sprite.x - 40, block.sprite.y - 10, 'block' + (index + 1), {});
+    label.block = block;
+    return label;
   });
 
   var move = new Interpreter(
