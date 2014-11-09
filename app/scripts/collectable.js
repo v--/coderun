@@ -16,6 +16,8 @@ Collectable.prototype = {
     this.sprite = this.game.add.sprite(x,y,this.name);
     this.sprite.scale.x = 1;
     this.sprite.scale.y =1;
+    this.game.physics.p2.enable(this.sprite);
+    this.sprite.body.kinematic = true;
   },
 
   update: function() {

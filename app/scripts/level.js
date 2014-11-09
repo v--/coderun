@@ -41,10 +41,13 @@ Level.prototype.preload = function() {
 
   beer = new Beer(this.game);
   beer.preload();
+
   exception_pack = new ExceptionPack(this.game);
   exception_pack.preload();
+
   label = new Label(this.game);
   label.preload();
+
   coffee = new Coffee(this.game);
   coffee.preload();
 
@@ -70,9 +73,11 @@ Level.prototype.create = function() {
   this.map.addTilesetImage('tileset_13');
   this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
-  beer.create(300,300);
-  exception_pack.create(120,120);
-  label.create(0,100);
+  beer.create(300,400);
+
+  exception_pack.create(320, 540);
+
+  label.create(200,540);
 
   //coffee.create(300,300);
 
