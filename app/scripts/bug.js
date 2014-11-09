@@ -13,7 +13,7 @@ function Bug(game, x, y) {
 Bug.prototype = {};
 
 Bug.prototype.preload = function () {
-    this.game.load.spritesheet('bug', 'img/bug_black.png', 36, 20, 2);
+    this.game.load.spritesheet('bug', 'img/bug_red.png', 36, 20, 2);
 }
 
 Bug.prototype.create = function () {

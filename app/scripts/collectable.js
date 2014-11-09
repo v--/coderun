@@ -26,8 +26,7 @@ Collectable.prototype = {
   },
 
   update: function() {
-
-    
+    //this.sprite.body.velocity.y = 10;
   }
 }
 

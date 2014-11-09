@@ -1,4 +1,4 @@
-function Block(game, movable, x, y) {
+function Block(game, movable, x, y, scaleX, scaleY) {
   this.logger = Logger.get('block');
   this.game = game;
   this.isMovable = movable;
@@ -7,6 +7,8 @@ function Block(game, movable, x, y) {
   this.tween = null;
   this.x = x;
   this.y = y;
+  this.scaleX = scaleX;
+  this.scaleY = scaleY;
 }
 
 Block.prototype = {
@@ -20,8 +22,8 @@ Block.prototype = {
     this.logger.info('Creating block');
     this.sprite =  this.game.add.sprite(this.x, this.y, '');
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.scale.x = 0.3;
-    this.sprite.scale.y = 0.3;
+    this.sprite.scale.x = this.scaleX;
+    this.sprite.scale.y = this.scaleY;
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.body.static = true;
     this.sprite.body.gravity = 0;
@@ -29,8 +31,8 @@ Block.prototype = {
     this.collidableSprite =  this.game.add.sprite(this.x, this.y, 'block');
     //this.collidableSprite.visible = false;
     this.collidableSprite.anchor.setTo(0.5, 0.5);
-    this.collidableSprite.scale.x = 0.3;
-    this.collidableSprite.scale.y = 0.3;
+    this.collidableSprite.scale.x = this.scaleX;
+    this.collidableSprite.scale.y = this.scaleY;
     this.game.physics.p2.enable(this.collidableSprite);
     this.collidableSprite.body.kinematic = true;
     this.collidableSprite.body.gravity = 0;
