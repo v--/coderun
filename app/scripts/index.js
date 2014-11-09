@@ -17,6 +17,7 @@ var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
 var statScreen = null;
+var levelStat = null;
 var currentLevel = 0;
 var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
 mainLogger.info('Game initialized');
@@ -32,16 +33,15 @@ function init() {
   game.bugs = 0;
   game.fixedBugs = 0;
 
-
   game.levels = [];
   game.levels.push(new Level(game, 1));
   game.levels[0].entities.push(new Map(this.game, 1));
   game.levels[0].entities.push(new Label(this.game, 200, 440));
   game.levels[0].entities.push(new ExceptionPack(this.game, 1300, 100));
   game.levels[0].entities.push(new Coffee(this.game, 300, 300));
-  game.levels[0].entities.push(new Block(this.game, true, 515, 500));
-  game.levels[0].entities.push(new Block(this.game, false, 100, 100));
-  game.levels[0].entities.push(new Block(this.game, true, 100, 300));
+  game.levels[0].entities.push(new Block(this.game, true, 515, 500, 0.3, 0.5));
+  game.levels[0].entities.push(new Block(this.game, false, 100, 100, 0.3, 0.3));
+  game.levels[0].entities.push(new Block(this.game, true, 100, 300, 0.3, 0.3));
   game.levels[0].entities.push(new Bug(this.game, 2000, 100));
   game.levels[0].entities.push(new Exit(this.game, 2300, 550));
 
@@ -55,9 +55,9 @@ function init() {
   game.levels[2].entities.push(new Label(this.game, 200, 440));
   game.levels[2].entities.push(new ExceptionPack(this.game, 320, 440));
   game.levels[2].entities.push(new Coffee(this.game, 300, 300));
-  game.levels[2].entities.push(new Block(this.game, false, 400, 200));
-  game.levels[2].entities.push(new Block(this.game, true, 1400, 100));
-  game.levels[2].entities.push(new Block(this.game, true, 500, 300));
+  game.levels[2].entities.push(new Block(this.game, false, 400, 520, 0.3, 0.3));
+  game.levels[2].entities.push(new Block(this.game, true, 1400, 100, 0.3, 0.3));
+  game.levels[2].entities.push(new Block(this.game, true, 500, 450, 0.3, 0.3));
   game.levels[2].entities.push(new Bug(this.game, 950, 100));
   game.levels[2].entities.push(new Bug(this.game, 1250, 100));
   game.levels[2].entities.push(new Bug(this.game, 1150, 100));
@@ -76,7 +76,9 @@ function create() {
   game.levels[currentLevel].create();
   game.player.create();
   game.camera.follow(game.player.sprite);
+  game.camera.follow(game.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
   initInterpreters();
+  createLevelStat();
 }
 
 function update() {
@@ -85,6 +87,7 @@ function update() {
   }
   game.levels[currentLevel].update();
   game.player.update();
+  updateLevelStat();
 }
 
 function initInterpreters() {
@@ -112,6 +115,28 @@ function setLevel() {
   statScreen = new StatScreen(game, newGame, currentLevel);
   game.destroy();
   game = newGame;
+}
+
+function createLevelStat() {
+  text = "Level: " + game.currentLevel
+         + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
+         + "\nExceptions : " + game.player.exceptions
+         + "\nCoffee: " + game.player.coffee
+         + "\nBeer: " + game.player.beers
+         + "\nLabels: " + game.player.labels;
+
+  var style = { font: "20px Courier New", fill: "#000", align: "left" };
+  levelStat = game.add.text(window.innerWidth - 250, 75 , text, style);
+  levelStat.fixedToCamera = true;
+}
+
+function updateLevelStat() {
+  levelStat.setText("Level: " + game.currentLevel
+             + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
+             + "\nExceptions : " + game.player.exceptions
+             + "\nCoffee: " + game.player.coffee
+             + "\nBeer: " + game.player.beers
+             + "\nLabels: " + game.player.labels);
 }
 
 window.addEventListener('resize', function () {
