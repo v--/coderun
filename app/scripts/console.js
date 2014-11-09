@@ -60,7 +60,7 @@ Console.prototype = {
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
     self.messages = self.messages.slice(0, 4).reverse();
-    self.messages.push(this.value + ' ' + self.interpret(this.value));
+  self.messages.push(this.value + ' ' + self.interpret(this.value));
     self.populateMessages();
   },
 

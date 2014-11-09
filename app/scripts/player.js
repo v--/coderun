@@ -11,6 +11,8 @@ function Player(game) {
   this.coffee = 0;
   this.labels = 0;
   this.direction = null;
+  this.fixedBugs = 0;
+  this.loaded = false;
 }
 
 Player.prototype = {
@@ -40,6 +42,10 @@ Player.prototype = {
     if(body != null) {
       if(body.sprite != null) {
         switch(body.sprite.key) {
+        case 'exit':
+          toastr.error('Next level!');
+          this.game.levelCleared = true;
+          break;
         case 'exception_pack':
           toastr.info('Gun ammo!');
           body.sprite.destroy();
@@ -98,6 +104,8 @@ Player.prototype = {
       if(body.sprite != null) {
         if(body.sprite.key == 'bug') {
           toastr.info('Bug fixed!');
+          this.fixedBugs += 1;
+          this.game.fixedBugs += 1;
           body.sprite.destroy();
           if(equation[0].bodyA.parent.sprite != null) {
             equation[0].bodyA.parent.sprite.destroy();
@@ -111,10 +119,11 @@ Player.prototype = {
 
   preload: function() {
     this.logger.info("Loading player sprite.");
-    this.game.load.spritesheet('player', 'img/man.png', 260, 260);
+    this.game.load.spritesheet('player', 'img/man.png', 214, 231);
   },
 
   create: function() {
+    this.loaded = true;
     this.logger.info("Creating player.");
     this.sprite = this.game.add.sprite(32, 100, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);

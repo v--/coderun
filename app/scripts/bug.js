@@ -17,6 +17,7 @@ Bug.prototype.preload = function () {
 }
 
 Bug.prototype.create = function () {
+    this.game.bugs += 1;
     this.sprite               = this.game.add.sprite(this.x, this.y, 'bug');
     this.sprite.allowRotation = false;
     this.sprite.scale.x       = 1.2;

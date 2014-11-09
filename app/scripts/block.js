@@ -16,17 +16,19 @@ Block.prototype = {
     this.game.load.image('block', 'img/block.jpg');
   },
 
-  create: function(x,y) {
+  create: function() {
     this.logger.info('Creating block');
     this.sprite =  this.game.add.sprite(this.x, this.y, '');
+    this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.x = 0.3;
     this.sprite.scale.y = 0.3;
     this.game.physics.arcade.enable(this.sprite);
     this.sprite.body.static = true;
     this.sprite.body.gravity = 0;
 
-    this.collidableSprite =  this.game.add.sprite(x, y, 'block');
+    this.collidableSprite =  this.game.add.sprite(this.x, this.y, 'block');
     //this.collidableSprite.visible = false;
+    this.collidableSprite.anchor.setTo(0.5, 0.5);
     this.collidableSprite.scale.x = 0.3;
     this.collidableSprite.scale.y = 0.3;
     this.game.physics.p2.enable(this.collidableSprite);
