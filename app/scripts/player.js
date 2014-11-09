@@ -57,7 +57,7 @@ Player.prototype = {
             if (d > 0.5) result = true;
         }
     }
-    
+
     return result;
 },
 
