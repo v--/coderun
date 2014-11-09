@@ -28,18 +28,19 @@ Player.prototype = {
     left: function() {
       this.sprite.body.velocity.x = -300;
       this.direction = 'left';
+      this.sprite.scale.x = -0.3;
     },
 
     right: function() {
       this.sprite.body.velocity.x = 300;
       this.direction = 'right';
+      this.sprite.scale.x = 0.3;
     }
   },
 
   playerTouch: function(body, shapeA, shapeB, equation) {
     if(body != null) {
       if(body.sprite != null) {
-        toastr.info(body.sprite.key);
         switch(body.sprite.key) {
         case 'exception_pack':
           body.sprite.destroy();

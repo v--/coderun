@@ -75,9 +75,15 @@ Level.prototype.create = function() {
   this.map.addTilesetImage('tileset_13');
   this.collisionGroup = this.game.physics.p2.createCollisionGroup();
 
-  //coffee.create(300,300);
+  beer.create(300,400);
 
-  collectables = this.game.add.group();
+  exception_pack.create(320, 540);
+
+  label.create(200,540);
+
+  coffee.create(300,300);
+
+  /*collectables = this.game.add.group();
   collectables.enableBody = true;
 
   for (var i = 0; i < 1 ; i++){
@@ -86,7 +92,7 @@ Level.prototype.create = function() {
     collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'exception_pack');
     collectable = collectables.create(this.game.world.randomX, this.game.world.randomY,'beer');
 
-  }
+  }*/
 
  // this.physics.arcade.overlap(this.player, collectobles, this.handle, null, this);
 
