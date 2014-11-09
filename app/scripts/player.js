@@ -20,21 +20,24 @@ Player.prototype = {
   move: {
     up: function() {
       if (this.game.time.now > this.jumpTimer && this.checkIfCanJump()) {
+        this.sprite.animations.play('jump');
         this.sprite.body.moveUp(700);
         this.jumpTimer = this.game.time.now + 950;
       }
     },
 
     left: function() {
+      this.sprite.animations.play('walk');
       this.sprite.body.velocity.x = -300;
       this.direction = 'left';
-      this.sprite.scale.x = -0.3;
+      this.sprite.scale.x = -0.4;
     },
 
     right: function() {
+      this.sprite.animations.play('walk');
       this.sprite.body.velocity.x = 300;
       this.direction = 'right';
-      this.sprite.scale.x = 0.3;
+      this.sprite.scale.x = 0.4;
     }
   },
 
@@ -56,7 +59,6 @@ Player.prototype = {
     }
     
     return result;
-
 },
 
   playerTouch: function(body, shapeA, shapeB, equation) {
@@ -141,7 +143,9 @@ Player.prototype = {
 
   preload: function() {
     this.logger.info("Loading player sprite.");
-    this.game.load.spritesheet('player', 'img/man.png', 214, 231);
+    this.game.load.spritesheet('player', 'img/bob_left.png', 168, 216);
+    this.game.load.spritesheet('player_standing', 'img/bob_standing.png', 117, 213);
+    this.game.load.spritesheet('player_walking', 'img/bob_walking.png', 117, 201);
     this.game.load.spritesheet('bullet', 'img/exceptionGun.png', 22, 22);
   },
 
@@ -151,9 +155,13 @@ Player.prototype = {
     this.sprite = this.game.add.sprite(32, 100, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.allowRotation = false;
-    this.sprite.scale.x = 0.3;
-    this.sprite.scale.y = 0.3;
+    this.sprite.scale.x = 0.4;
+    this.sprite.scale.y = 0.4;
     this.game.physics.p2.enable(this.sprite);
+
+
+    this.sprite.animations.add('walk', [1, 2, 0, 3, 4, 0, 4, 3, 0, 2, 1], 7, false, true);
+    this.sprite.animations.add('jump', [0, 21, 22, 21, 0], 5, false, true);
 
     this.sprite.body.fixedRotation = true;
     //this.sprite.body.collideWorldBounds = true;
@@ -161,6 +169,8 @@ Player.prototype = {
     //this.sprite.body.collides(this.game.level.collisionGroup);
     this.sprite.body.velocity.x = 0;
     this.sprite.body.damping = 0.9;
+
+
 
     this.wasd = {
       up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -175,6 +185,7 @@ Player.prototype = {
     this.space.onDown.add(this.shoot.bind(this));
 
     //this.sprite.body.onBeginContact();
+
 
     var keyGroups = ['wasd', 'arrows']
 
