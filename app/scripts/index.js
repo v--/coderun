@@ -17,6 +17,7 @@ var player = null;
 var level = null;
 var currentLevel = 0;
 var statScreen = null;
+var levelStat = null;
 
 try {
   var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
@@ -37,7 +38,6 @@ function init() {
   game.levelCleared = false;
   game.bugs = 0;
   game.fixedBugs = 0;
-  
 
   game.levels = [];
   game.levels.push(new Level(game, 1));
@@ -85,6 +85,8 @@ function create() {
   game.levels[currentLevel].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;
   })[0].move('right', 1);
+
+  createLevelStat();
 }
 
 function update() {
@@ -93,7 +95,7 @@ function update() {
   }
   game.levels[currentLevel].update();
   game.player.update();
-
+  updateLevelStat();
 }
 
 function setLevel() {
@@ -102,6 +104,28 @@ function setLevel() {
   statScreen = new StatScreen(game, newGame, currentLevel);
   game.destroy();
   game = newGame;
+}
+
+function createLevelStat() {
+  text = "Level: " + game.currentLevel
+         + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
+         + "\nExceptions : " + game.player.exceptions
+         + "\nCoffee: " + game.player.coffee
+         + "\nBeer: " + game.player.beers
+         + "\nLabels: " + game.player.labels;
+
+  var style = { font: "20px Courier New", fill: "#000", align: "left" };
+  levelStat = game.add.text(window.innerWidth - 250, 75 , text, style);
+  levelStat.fixedToCamera = true;
+}
+
+function updateLevelStat() {
+  levelStat.setText("Level: " + game.currentLevel
+             + "\nBugs fixed: " + game.fixedBugs + "/" + game.bugs
+             + "\nExceptions : " + game.player.exceptions
+             + "\nCoffee: " + game.player.coffee
+             + "\nBeer: " + game.player.beers
+             + "\nLabels: " + game.player.labels);
 }
 
 window.addEventListener('resize', function () {
