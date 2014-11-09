@@ -1,7 +1,7 @@
 function Block(game, movable, x, y) {
   this.logger = Logger.get('block');
   this.game = game;
-  this.isMovable = false;
+  this.isMovable = movable;
   this.sprite = null;
   this.collidableSprite = null;
   this.tween = null;
@@ -46,32 +46,31 @@ Block.prototype = {
       var tileSize = 100;
       var currentX = this.sprite.x;
       var currentY = this.sprite.y;
-      var offset;
-      if(number) {
-        offset = number * tileSize;
-      }
-      else {
-        offset = tileSize;
-      }
+      var offset = tileSize;
+
+      if (number)
+        offset *= number;
+
       var duration = offset * 5;
       var ease = Phaser.Easing.Linear.NONE;
+      var directionTo;
 
       switch(direction) {
         case 'left':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX + offset }, duration, ease, true);
+          directionTo = { x: currentX = offset };
           break;
         case 'right':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX - offset }, duration, ease, true);
+          directionTo = { x: currentX - offset };
           break;
         case 'up':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY - offset }, duration, ease, true);
+          directionTo = { y: currentY - offset };
           break;
         case 'down':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY + offset }, duration, ease, true);
-          break;
-        default:
+          directionTo = { y: currentY + offset };
           break;
       }
+
+      this.tween = this.game.add.tween(this.sprite).to(directionTo, duration, ease, true);
     }
   },
 

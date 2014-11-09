@@ -28,6 +28,20 @@ catch (e) {
 }
 
 function init() {
+<<<<<<< HEAD
+=======
+  game.level = new Level(game, 1);
+  game.level.entities.push(new Map(this.game, 1));
+  game.level.entities.push(new Beer(this.game, 300, 400));
+  game.level.entities.push(new Label(this.game, 200, 440));
+  game.level.entities.push(new ExceptionPack(this.game, 320, 440));
+  game.level.entities.push(new Coffee(this.game, 300, 300));
+  game.level.entities.push(new Block(this.game, false, 400, 200));
+  game.level.entities.push(new Block(this.game, false, 100, 100));
+  game.level.entities.push(new Block(this.game, true, 100, 300));
+  game.level.entities.push(new Bug(this.game, 950, 100));
+
+>>>>>>> aa32cbd84855094667dba017782fa83529be4fb8
   game.player = new Player(game);
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
@@ -81,6 +95,10 @@ function create() {
   game.levels[currentLevel].create();
   game.player.create();
   game.camera.follow(game.player.sprite);
+
+  game.level.entities.filter(function(entity) {
+    return entity instanceof Block && entity.isMovable;
+  })[0].move('right', 1);
 }
 
 function update() {
