@@ -6,7 +6,7 @@ var ExceptionPack = require('exception_pack');
 var Label = require('label');
 var Block = require('block');
 
-var console =  new Console(document.getElementById('console'));
+var htmlConsole =  new Console(document.getElementById('console'));
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
@@ -20,13 +20,11 @@ catch (e) {
   mainLogger.error('The game could not be created: ' + e.message);
 }
 
-
 function preload() {
   game.level = new Level(game);
   game.level.preload();
 
-  game.player = new Player(game, console.focus.bind(console));
-  console.onEnter = game.player.focus.bind(game.player);
+  game.player = new Player(game);
   game.player.preload();
 }
 
@@ -49,4 +47,23 @@ function update() {
 
 window.addEventListener('resize', function () {
   game.renderer.resize(phaserContainer.scrollWidth, phaserContainer.scrollHeight);
+});
+
+window.addEventListener('keydown', function (e) {
+  if (e.keyCode != 192)
+    return;
+
+  var keyboard = game.input;
+
+  if (keyboard.disabled) {
+    htmlConsole.blur();
+    game.player.focus();
+    keyboard.disabled = false;
+  }
+
+  else {
+    htmlConsole.focus();
+    game.player.blur();
+    keyboard.disabled = true;
+  }
 });
