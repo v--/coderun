@@ -45,7 +45,7 @@ Map.prototype = {
 
     this.map.setCollisionBetween(0, 100, true, this.layer, true);
     this.game.physics.p2.convertTilemap(this.map, this.layer);
-    this.game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+    this.game.physics.p2.setBoundsToWorld(true, true, true, true, true);
   },
 
   update: function() {
