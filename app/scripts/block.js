@@ -37,35 +37,34 @@ Block.prototype = {
     //this.collidableSprite.visible = false;
   },
 
-  translate: function(direction, number) {
+  move: function(direction, number) {
     if(this.isMovable) {
+      var tileSize = 100;
       var currentX = this.sprite.x;
       var currentY = this.sprite.y;
-      // switch(direction) {
-      //   case 'left':
-      //     this.game.physics.arcade.moveToXY(this.sprite, currentX + number, currentY, 100); break;
-      //   case 'right':
-      //     this.game.physics.arcade.moveToXY(this.sprite, currentX - number, currentY, 100); break;
-      //   case 'up':
-      //     this.game.physics.arcade.moveToXY(this.sprite, currentX, currentY - number, 100); break;
-      //   case 'down':
-      //     this.game.physics.arcade.moveToXY(this.sprite, currentX, currentY + number, 100); break;
-      //   default:
-      //     break;
-      // }
-      var duration = number * 5;
+      var offset;
+      if(number) {
+        offset = number * tileSize;
+      }
+      else {
+        offset = tileSize;
+      }
+      var duration = offset * 5;
       var ease = Phaser.Easing.Linear.NONE;
 
       switch(direction) {
         case 'left':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX + number }, duration, ease, true);
+          this.tween = this.game.add.tween(this.sprite).to({ x: currentX + offset }, duration, ease, true);
           break;
         case 'right':
-          this.tween = this.game.add.tween(this.sprite).to({ x: currentX - number }, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ x: currentX - offset }, duration, ease, true);
+          break;
         case 'up':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY - number }, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ y: currentY - offset }, duration, ease, true);
+          break;
         case 'down':
-          this.tween = this.game.add.tween(this.sprite).to({ y: currentY + number }, duration, ease, true); break;
+          this.tween = this.game.add.tween(this.sprite).to({ y: currentY + offset }, duration, ease, true);
+          break;
         default:
           break;
       }

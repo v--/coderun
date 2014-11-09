@@ -82,7 +82,7 @@ Level.prototype.create = function() {
 
   this.blocks = [block1, block2, block3];
 
-  block2.translate('left', 300);
+  block2.move('left');
   //block3.setCollisionGroup(this.collisionGroup);
 
   this.layer = this.map.createLayer('solid');
