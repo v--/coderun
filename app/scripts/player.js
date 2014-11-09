@@ -153,7 +153,7 @@ Player.prototype = {
   },
 
   update: function() {
-    this.logger.info(this.direction);
+    // this.logger.info(this.direction);
     // this.game.physics.arcade.collide(this.sprite, this.game.level.collisionGroup);
     // this.sprite.body.velocity.y = 0;
     // this.sprite.body.velocity.x = 0;

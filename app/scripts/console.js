@@ -29,26 +29,35 @@ function Console(element) {
 Console.prototype = {
   value: '',
 
+  reset: function() {
+    this.input.value = '';
+  },
+
   blur: function() {
     this.input.blur();
+    this.reset();
   },
 
   focus: function() {
     this.input.focus();
   },
 
-  reset: function() {
-    this.input.value = '';
+  populateMessages: function() {
+    this.history.innerHTML = '';
+
+    for (i in this.messages) {
+      var message = document.createElement('div');
+      message.innerHTML = this.messages[i];
+      this.history.appendChild(message);
+    }
   },
 
   onSubmit: function(e) {
     self.logger.info('New command: ' + this.value);
-    self.messages.unshift(this.value);
-
-    var message = document.createElement('div');
-    message.innerHTML = this.value;
-    self.history.appendChild(message);
-
+    self.messages = self.messages.slice(0, 4).reverse();
+    self.messages.push(this.value);
+    console.log(self.messages);
+    self.populateMessages();
     self.blur();
   },
 

@@ -20,6 +20,7 @@ html, body {
     bottom: 0;
     position: absolute;
     width: 100%;
+    font-family: sans-serif;
 }
 
 #console > span {
@@ -32,7 +33,9 @@ html, body {
 #console > div {
     color: #fff;
     position: absolute;
-    bottom: 0;
+    bottom: 30px;
+    font-size: 20px;
+    font-family: sans-serif;
 }
 
 #phaser {
