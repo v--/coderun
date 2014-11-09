@@ -52,7 +52,6 @@ function create() {
   game.level.create();
   game.player.create();
   game.camera.follow(game.player.sprite);
-
 }
 
 function update() {
@@ -66,20 +65,20 @@ window.addEventListener('resize', function () {
 });
 
 window.addEventListener('keydown', function (e) {
-  if (e.keyCode != 192)
+  if (e.keyCode != 192 && e.keyCode != 13)
     return;
+
+  e.preventDefault();
 
   var keyboard = game.input;
 
   if (keyboard.disabled) {
     htmlConsole.blur();
-    game.player.focus();
     keyboard.disabled = false;
   }
 
-  else {
+  else if (e.keyCode == 192) {
     htmlConsole.focus();
-    game.player.blur();
     keyboard.disabled = true;
   }
 });
