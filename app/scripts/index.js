@@ -22,6 +22,7 @@ var currentLevel = 0;
 var statScreen = null;
 var levelStat = null;
 
+
 var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
 mainLogger.info('Game initialized');
 
@@ -75,11 +76,19 @@ function init() {
 }
 
 function preload() {
+  game.load.audio('fx.bugkill', 'audio/fx/errororfailed.mp3');
+  game.load.audio('fx.exceptiongunFire', 'audio/fx/cork.mp3');
+  game.load.audio('fx.itemPickup', 'audio/fx/pick.wav');
   game.levels[currentScreen].preload();
   game.player.preload();
 }
 
 function create() {
+  game.fx = {};
+  game.fx.bugkill          = game.add.audio('fx.bugkill');
+  game.fx.exceptiongunFire = game.add.audio('fx.exceptiongunFire');
+  game.fx.itemPickup       = game.add.audio('fx.itemPickup');
+
   game.levels[currentScreen].create();
   game.player.create();
   // game.camera.follow(game.player.sprite);
