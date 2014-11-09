@@ -80,7 +80,7 @@ function preload() {
 function create() {
   game.levels[currentLevel].create();
   game.player.create();
-  game.camera.follow(game.player.sprite);
+  game.camera.follow(game.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
   game.levels[currentLevel].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;

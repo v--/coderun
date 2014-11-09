@@ -69,6 +69,7 @@ Player.prototype = {
         case 'bug':
           toastr.error('You died!');
           this.sprite.destroy();
+          this.game.levelCleared = true;
           this.game.paused = true;
           break;
         default:
@@ -92,9 +93,9 @@ Player.prototype = {
     this.game.physics.p2.enable(bullet);
     //bullet.body.moveRight(300);
     bullet.lifespan = 3000;
-    bullet.body.restitution = 3000;
+    bullet.body.restitution = 6000;
     bullet.body.velocity.x = offset*900;
-    bullet.body.velocity.y = 0;
+    //bullet.body.velocity.y = 0;
     this.exceptions -= 1;
     bullet.body.onBeginContact.add(this.bulletHit, this);
   },
@@ -120,6 +121,7 @@ Player.prototype = {
   preload: function() {
     this.logger.info("Loading player sprite.");
     this.game.load.spritesheet('player', 'img/man.png', 214, 231);
+    this.game.load.spritesheet('bullet', 'img/exceptionGun.png', 22, 22);
   },
 
   create: function() {
