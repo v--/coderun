@@ -49,7 +49,7 @@ window.addEventListener('resize', function () {
 });
 
 window.addEventListener('keydown', function (e) {
-  if (e.keyCode != 192)
+  if (e.keyCode != 192 && e.keyCode != 13)
     return;
 
   e.preventDefault();
@@ -61,7 +61,7 @@ window.addEventListener('keydown', function (e) {
     keyboard.disabled = false;
   }
 
-  else {
+  else if (e.keyCode == 192) {
     htmlConsole.focus();
     keyboard.disabled = true;
   }

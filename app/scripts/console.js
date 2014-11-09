@@ -56,9 +56,7 @@ Console.prototype = {
     self.logger.info('New command: ' + this.value);
     self.messages = self.messages.slice(0, 4).reverse();
     self.messages.push(this.value);
-    console.log(self.messages);
     self.populateMessages();
-    self.blur();
   },
 
   onValueChange: function(e) {
