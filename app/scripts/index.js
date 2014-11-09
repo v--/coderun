@@ -81,15 +81,11 @@ function preload() {
 function create() {
   game.levels[currentScreen].create();
   game.player.create();
-  game.camera.follow(game.player.sprite);
+  // game.camera.follow(game.player.sprite);
   game.camera.follow(game.player.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
 
-  game.levels[currentScreen].entities.filter(function(entity) {
-    return entity instanceof Block && entity.isMovable;
-  })[0].move('right', 1);
-
-  initInterpreters();
   createLevelStat();
+  initInterpreters();
 }
 
 function update() {
@@ -102,7 +98,7 @@ function update() {
 }
 
 function initInterpreters() {
-  var moveable = game.levels[currentLevel].entities.filter(function(entity) {
+  var moveable = game.levels[currentScreen].entities.filter(function(entity) {
     return entity instanceof Block && entity.isMovable;
   });
 
