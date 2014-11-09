@@ -93,7 +93,7 @@ function update() {
     setLevel();
   }
 
-  background.style.right = game.camera.view.x + 'px';
+  background.style.left = (-game.camera.view.x) + 'px';
   game.levels[currentScreen].update();
   game.player.update();
   updateLevelStat();
