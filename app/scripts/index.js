@@ -8,11 +8,15 @@ var Block = require('block');
 var Coffee = require('coffee');
 var Bug = require('bug');
 var Map = require('map');
+var Exit = require('exit');
+var StatScreen = require('stat_screen');
 
 var htmlConsole =  new Console(document.getElementById('console'));
 var phaserContainer = document.getElementById('phaser');
 var player = null;
 var level = null;
+var currentLevel = 0;
+var statScreen = null;
 
 try {
   var game = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
@@ -24,40 +28,76 @@ catch (e) {
 }
 
 function init() {
-  game.level = new Level(game, 1);
-  game.level.entities.push(new Map(this.game, 1));
-  game.level.entities.push(new Beer(this.game, 300, 400));
-  game.level.entities.push(new Label(this.game, 200, 440));
-  game.level.entities.push(new ExceptionPack(this.game, 320, 440));
-  game.level.entities.push(new Coffee(this.game, 300, 300));
-  game.level.entities.push(new Block(this.game, false, 400, 200));
-  game.level.entities.push(new Block(this.game, false, 100, 100));
-  game.level.entities.push(new Block(this.game, true, 100, 300));
-  game.level.entities.push(new Bug(this.game, 950, 100));
-
-
   game.player = new Player(game);
-
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
   game.physics.p2.gravity.y = 1000;
+
+  game.currentLevel = currentLevel + 1;
+  game.levelCleared = false;
+  game.bugs = 0;
+  game.fixedBugs = 0;
+  
+
+  game.levels = [];
+  game.levels.push(new Level(game, 1));
+  game.levels[0].entities.push(new Map(this.game, 1));
+  game.levels[0].entities.push(new Label(this.game, 200, 440));
+  game.levels[0].entities.push(new ExceptionPack(this.game, 320, 440));
+  game.levels[0].entities.push(new Coffee(this.game, 300, 300));
+  game.levels[0].entities.push(new Block(this.game, false, 400, 200));
+  game.levels[0].entities.push(new Block(this.game, false, 100, 100));
+  game.levels[0].entities.push(new Block(this.game, true, 100, 300));
+  game.levels[0].entities.push(new Bug(this.game, 950, 100));
+  game.levels[0].entities.push(new Exit(this.game, 2300, 550));
+
+  game.levels.push(statScreen);
+  //game.levels.push(new StatScreen(game, game.player, currentLevel));
+
+  //console.log(game.levels);
+
+  game.levels.push(new Level(game, 1));
+  game.levels[2].entities.push(new Map(this.game, 1));
+  game.levels[2].entities.push(new Label(this.game, 200, 440));
+  game.levels[2].entities.push(new ExceptionPack(this.game, 320, 440));
+  game.levels[2].entities.push(new Coffee(this.game, 300, 300));
+  game.levels[2].entities.push(new Block(this.game, false, 400, 200));
+  game.levels[2].entities.push(new Block(this.game, false, 100, 100));
+  game.levels[2].entities.push(new Block(this.game, true, 100, 300));
+  game.levels[2].entities.push(new Bug(this.game, 950, 100));
+  game.levels[2].entities.push(new Bug(this.game, 1250, 100));
+  game.levels[2].entities.push(new Exit(this.game, 2300, 550));
+
+  game.levels.push(statScreen);
+
 }
 
 function preload() {
-  game.level.preload();
-  game.player.preload();
+  game.levels[currentLevel].preload();
+  game.player.preload(); 
 }
 
 function create() {
-  game.level.create();
+  game.levels[currentLevel].create();
   game.player.create();
   game.camera.follow(game.player.sprite);
 }
 
 function update() {
-  game.level.update();
+  if(game.levelCleared) {
+    setLevel(game.currentLevel);
+  }
+  game.levels[currentLevel].update();
   game.player.update();
 
+}
+
+function setLevel() {
+  currentLevel += 1;
+  var newGame = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
+  statScreen = new StatScreen(game, newGame, currentLevel);
+  game.destroy();
+  game = newGame;
 }
 
 window.addEventListener('resize', function () {
