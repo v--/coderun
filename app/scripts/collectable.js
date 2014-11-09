@@ -1,9 +1,8 @@
 function Collectable(game){
-  this.game = game;
-  this.name = null
-  this.image = null;
-  this.isVisible = true;
-  this.sprite=null;
+  this.game   = game;
+  this.name   = null;
+  this.image  = null;
+  this.sprite = null;
 }
 
 Collectable.prototype = {
@@ -14,29 +13,21 @@ Collectable.prototype = {
 
   create: function(x,y) {
     this.sprite = this.game.add.sprite(x,y,this.name);
+    this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.x = 1;
-    this.sprite.scale.y =1;
+    this.sprite.scale.y = 1;
+    this.game.physics.p2.enable(this.sprite);
+    //this.sprite.body.kinematic = true;
+    this.sprite.body.fixedRotation = true;
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.damping = 0.9;
   },
 
   update: function() {
+
     
-   // game.physics.arcade.overlap(player, collectable, collect, null, this);
-  },
-
-  removee: function(){
-    this.isVisible = false;
-    this.sprite.kill();
   }
-
-
 }
- // function collect (player, collectable) {
-  
-  //  collectable.kill();
- 
-//}
-
-
 
 
 module.exports = Collectable;
