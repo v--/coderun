@@ -73,21 +73,25 @@ Player.prototype = {
           toastr.info('Gun ammo!');
           body.sprite.destroy();
           this.exceptions += 1;
+          this.game.fx.itemPickup.play();
           break;
         case 'beer':
           toastr.info('BEER!');
           body.sprite.destroy();
           this.beers += 1;
+          this.game.fx.itemPickup.play();
           break;
         case 'coffee':
           toastr.info('Coffee...');
           body.sprite.destroy();
           this.coffee += 1;
+          this.game.fx.itemPickup.play();
           break;
         case 'label':
           toastr.info('A label.');
           body.sprite.destroy();
           this.labels += 1;
+          this.game.fx.itemPickup.play();
           break;
         case 'bug':
           toastr.error('You died!');
@@ -121,6 +125,7 @@ Player.prototype = {
     //bullet.body.velocity.y = 0;
     this.exceptions -= 1;
     bullet.body.onBeginContact.add(this.bulletHit, this);
+    this.game.fx.exceptiongunFire.play();
   },
 
   bulletHit: function(body, shapeA, shapeB, equation) {
@@ -130,6 +135,7 @@ Player.prototype = {
           toastr.info('Bug fixed!');
           this.fixedBugs += 1;
           this.game.fixedBugs += 1;
+          this.game.fx.bugkill.play();
           body.sprite.destroy();
           if(equation[0].bodyA.parent.sprite != null) {
             equation[0].bodyA.parent.sprite.destroy();
