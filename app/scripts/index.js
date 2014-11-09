@@ -35,7 +35,6 @@ function init() {
   game.level.entities.push(new Block(this.game, true, 100, 300));
   game.level.entities.push(new Bug(this.game, 950, 100));
 
-
   game.player = new Player(game);
 
   game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -53,9 +52,9 @@ function create() {
   game.player.create();
   game.camera.follow(game.player.sprite);
 
-  // console.log(game.level.blocks.filter(function(block) {
-  // 	return block.isMovable;
-  // }))
+  game.level.entities.filter(function(entity) {
+    return entity instanceof Block && entity.isMovable;
+  })[0].move('right', 1);
 }
 
 function update() {

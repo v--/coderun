@@ -1,8 +1,14 @@
 html, body {
     margin: 0;
-    height: 100%;
+    background-color: #000;
+}
+
+body {
+    vertical-align: middle;
+    height: 672px;
     width: 100%;
     background-color: #506;
+    position: relative;
 }
 
 #console {
@@ -16,6 +22,7 @@ html, body {
     font-size: 20px;
     color: #fff;
     background-color: #304;
+    box-shadow: 0 0 25px #000;
     border: 0;
     bottom: 0;
     position: absolute;
@@ -36,6 +43,7 @@ html, body {
     bottom: 30px;
     font-size: 20px;
     font-family: sans-serif;
+    text-shadow: 0 0 15px #000;
 }
 
 #phaser {
