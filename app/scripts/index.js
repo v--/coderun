@@ -104,7 +104,7 @@ function initInterpreters() {
   });
 
   moveable.forEach(function(block, index) {
-    game.add.text(block.x - 40, block.y - 10, 'block' + index, {});
+    game.add.text(block.x - 40, block.y - 10, 'block' + (index + 1), {});
   });
 
   var move = new Interpreter(
