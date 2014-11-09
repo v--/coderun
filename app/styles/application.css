@@ -4,6 +4,7 @@ html, body {
 }
 
 body {
+    overflow: hidden;
     vertical-align: middle;
     height: 672px;
     width: 100%;
@@ -58,6 +59,7 @@ body {
 }
 
 #background {
+    display: none;
     width: 200%;
     height: 100%;
     position: absolute;

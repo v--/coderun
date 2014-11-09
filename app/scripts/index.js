@@ -53,7 +53,7 @@ function init() {
   //game.levels.push(new StatScreen(game, game.player, currentScreen));
 
   //console.log(game.levels);
-  
+
   game.levels.push(new Level(game, 1));
   game.levels[2].entities.push(new Map(this.game, 2));
   //game.levels[2].entities.push(new Label(this.game, 200, 440));
@@ -108,22 +108,28 @@ function update() {
   game.player.update();
   updateLevelStat();
 
-  game.levels[currentScreen].blockLabels.forEach(function(label) {
-    label.x = label.block.sprite.x - 40;
-    label.y = label.block.sprite.y - 10;
-  });
+  if (game.levels[currentScreen].blockLabels) {
+    game.levels[currentScreen].blockLabels.forEach(function(label) {
+      label.x = label.block.sprite.x - 40;
+      label.y = label.block.sprite.y - 10;
+    });
+  }
 }
 
 function initInterpreters() {
-  var moveable = game.levels[currentScreen].entities.filter(function(entity) {
-    return entity instanceof Block && entity.isMovable;
-  });
+  if (game.levels[currentScreen].entities) {
+    background.style.display = 'block';
 
-  game.levels[currentScreen].blockLabels = moveable.map(function(block, index) {
-    label = game.add.text(block.sprite.x - 40, block.sprite.y - 10, 'block' + (index + 1), {});
-    label.block = block;
-    return label;
-  });
+    var moveable = game.levels[currentScreen].entities.filter(function(entity) {
+      return entity instanceof Block && entity.isMovable;
+    });
+
+    game.levels[currentScreen].blockLabels = moveable.map(function(block, index) {
+      label = game.add.text(block.sprite.x - 40, block.sprite.y - 10, 'block' + (index + 1), {});
+      label.block = block;
+      return label;
+    });
+  }
 
   var move = new Interpreter(
     [/(block)(\d+)/, /(up|down|left|right)/, /\d*/],
@@ -140,6 +146,9 @@ function initInterpreters() {
 }
 
 function setLevel() {
+  background.style.display = 'none';
+  htmlConsole.messages = [];
+  htmlConsole.populateMessages();
   currentScreen += 1;
   var newGame = new Phaser.Game(phaserContainer.scrollWidth, phaserContainer.scrollHeight, Phaser.AUTO, phaserContainer, { init: init, preload: preload, create: create, update: update }, true);
   statScreen = new StatScreen(game, newGame, currentScreen);
