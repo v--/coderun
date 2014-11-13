@@ -2,7 +2,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/v--/coderun/master/app/assets/img/screenshot.png)
 
-This game was developed for [http://hackfmi.com](HackFMI 4).
+This game was developed for [HackFMI 4](http://hackfmi.com).
 
 A dynamic, action-packed puzzle
 
