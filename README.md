@@ -1,4 +1,9 @@
 # Coderun
+
+![Screenshot](https://raw.githubusercontent.com/v--/coderun/master/app/assets/img/screenshot.png)
+
+This game was developed for [http://hackfmi.com](HackFMI 4).
+
 A dynamic, action-packed puzzle
 
 Player:
